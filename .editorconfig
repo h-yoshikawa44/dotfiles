@@ -8,8 +8,11 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 indent_size = 2
 
+[*.go]
+indent_style = tab
+
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{java,php}]
+[*.{java,php,py,go}]
 indent_size = 4
