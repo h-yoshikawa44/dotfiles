@@ -147,7 +147,7 @@ tsconfig.json 作成
 ```bash
 $ ./node_modules/.bin/tsc --init
 ```
-※tsconfig.json はこのディレクトリ階層においてあるファイル参照
+※[tsconfig.json](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/tsconfig.json)
 
 resources/js を resources/ts にリネーム
 ```bash
@@ -200,8 +200,13 @@ airbnb の共有設定をインストール
 $ yarn add -D eslint-config-airbnb
 ```
 
-各種設定ファイルは、このディレクトリ階層においているファイル参照。  
-VSCode 拡張を入れる。
+※各種設定ファイル
+- [.eslintrc.js](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.eslintrc.js)
+- [.eslintignore](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.eslintignore)
+- [.prettierrc](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.prettierrc)
+- [.prettierignore](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.prettierignore)
+
+それぞれ VSCode 拡張を入れる。
 
 ### 設定の補足
 #### import/extensions と import/resolver
@@ -236,7 +241,9 @@ Unable to resolve path to module './components/templates/Login'.eslint(import/no
 ```
 
 ## PHP Intelephense + phpcs + phpcbf 導入
-上の階層の README 参照。
+[README](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/README.md) を参照。
+
+※[phpcs.xml](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/phpcs.xml)
 
 ## テスト環境構築
 docker-compose.yml にテスト用のコンテナ追記
@@ -254,23 +261,7 @@ db-testing:
 
 DB 接続情報を app コンテナの環境変数に設定しているので、この設定が優先的に使われる。  
 そのため、PHPUnit の設定ファイルで強制上書きすることで、PHPUnit 実行時はこの強制上書き設定で実行するようにする（env タグで設定すること）  
-このディレクトリ階層においてある phpunit.xml 参照。
+※[phpunit.xml](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/phpunit.xml)
 
-### CI 環境でのテスト環境
-GitHub Actions 上では DB_HOST を 127.0.0.1 としないといけないが、上記設定が優先されるようになるので、DB_HOST だけを変更した GitHub Actions 用の PHPUnit 設定ファイルを別で作成しておく。
-```xml
-<env name="DB_HOST" value="127.0.0.1" force="true"/>
-```
-GitHub Actions 上でテスト実行する時は、このファイルを指定して実行するようにすること。
-```bash
-$ ./vendor/bin/phpunit --configuration=phpunit-ci.xml
-```
+CI 環境におけるテスト環境の注意点は [README-ci-cd](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/README-ci-cd.md) を参照。
 
-## GitHub Actions ワークフローの補足説明
-各種 Lint、テスト実行コマンドについては、あらかじめ scripts に定義したものを使用しているので、その定義をやっておくこと。
-
-```
-$ yarn lint
-$ composer lint
-$ composer test-ci
-```
