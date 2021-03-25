@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "[graphql]": {
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.formatOnSave": true
+    },
+    "[typescript]": {
+      "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": true
+    },
+    "[php]": {
+      "editor.defaultFormatter": "valeryanm.vscode-phpsab",
+      "editor.formatOnSave": true
+    },
+    "eslint.workingDirectories": ["src"],
+    "eslint.packageManager": "yarn",
+    "prettier.ignorePath": "src/.prettierignore",
+    "phpsab.standard": "src/phpcs.xml",
+    "phpsab.composerJsonPath": "src/composer.json",
+    "phpsab.snifferMode": "onType"
+  }
+}

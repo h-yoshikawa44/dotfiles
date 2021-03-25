@@ -1,0 +1,95 @@
+name: Develop Check
+on:
+  push:
+    branches-ignore:
+      - main
+
+env:
+  project-name: pj-name
+
+defaults:
+  run:
+    working-directory: ./src
+
+jobs:
+  front-end-check:
+    name: Front End Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.2.0
+
+      - name: Get Yarn Cache Directory Path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.project-name }}-
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Lint
+        run: yarn lint
+
+  back-end-check:
+    name: Back End Lint & Test
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0.22
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_DATABASE: laravel_test
+          MYSQL_USER: phper
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: secret
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # GitHub Actions の PHP のデフォルトが 8系のため 7.4を使うように指定
+      - name: Setup PHP 7.4
+        run: sudo update-alternatives --set php /usr/bin/php7.4
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/composer.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-progress --prefer-dist
+
+      - name: Generate Key
+        run: php artisan key:generate --env=testing
+
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Lint
+        run: composer lint
+
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: composer test-ci
