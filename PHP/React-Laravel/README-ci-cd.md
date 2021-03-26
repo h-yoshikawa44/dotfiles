@@ -1,7 +1,7 @@
 # React × Laravel CI/CD
 
-## CI 環境でのテスト環境
-GitHub Actions 上では DB_HOST を 127.0.0.1 としないといけないが、phpcs.xml で設定を強制上書きしている関係で、その設定が優先して使われてしまう。
+## CI 環境でのテスト DB 環境
+GitHub Actions 上では DB_HOST を 127.0.0.1 としないといけないが、phpcs.xml で設定を強制上書きしている関係で、その設定が優先して使われてしまう。  
 そのため DB_HOST だけを変更した GitHub Actions 用の PHPUnit 設定ファイルを別で作成しておく。
 ```xml
 <env name="DB_HOST" value="127.0.0.1" force="true"/>
@@ -61,6 +61,9 @@ package.json
 composer.json
 ```json
 "scripts": {
+  "lint": [
+      "./vendor/bin/phpcs --standard=phpcs.xml ."
+  ],
  "lint:fix": [
       "./vendor/bin/phpcbf --standard=phpcs.xml ."
   ],

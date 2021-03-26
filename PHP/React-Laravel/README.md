@@ -2,53 +2,8 @@
 ここでは TypeScript + React（Laravel Mix）× Laravel による、SPA × API 構成を指す。
 
 ## 環境構築
-[GitHub - ucan-lab/docker-laravel](https://github.com/ucan-lab/docker-laravel) を使わせてもらうと早いので、こちらをベースに作る。
-
-なお、紹介記事において作者本人も触れられている通り、コンテナ内の Node.js は動作が遅いため、ローカルや WSL の Node.js を使用するとよい。
-
-### 各種バージョン指定
-各種 Dockerfile で PHP や MySQL のバージョンを、自分が使用するバージョンにしておく。
-（デフォルトでは最新バージョンベースのため）
-
-また、インストールする Laravel のバージョンを指定しておく。  
-（デフォルトでは最新バージョンが入るため）
-
-Makefile
-```
-laravel-install:
-	docker-compose exec app composer create-project --prefer-dist laravel/laravel=6.* .
-```
-
-### コンテナ作成 & Laravel プロジェクト作成
-```bash
-$ make create-project
-```
-
-### 開発補助ライブラリの導入
-こちらもデフォルトでは最新ベースで入る。  
-Laravel のバージョンを下げている場合は、あわせてバージョンを下げておかないとバージョンの依存関係でエラーになる。
-
-Makefile（Laravel 6系を使用した場合の例）
-```
-install-recommend-packages:
-	docker-compose exec app composer require doctrine/dbal "^2"
-	docker-compose exec app composer require --dev barryvdh/laravel-ide-helper=2.8.*
-	docker-compose exec app composer require --dev beyondcode/laravel-dump-server=1.3.*
-	docker-compose exec app composer require --dev barryvdh/laravel-debugbar
-	docker-compose exec app composer require --dev roave/security-advisories:dev-master
-	docker-compose exec app php artisan vendor:publish --provider="BeyondCode\DumpServer\DumpServerServiceProvider"
-	docker-compose exec app php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
-```
-
-ライブラリインストール
-```bash
-$ make install-recommend-packages
-```
-
-### Laravel initial settings の適用
-[GitHub - ucan-lab/docker-laravel - wiki - Laravel initial settings](https://github.com/ucan-lab/docker-laravel/wiki/Laravel-initial-settings)
-
-書いてある通りに設定を修正していく。
+Docker 環境構築部分は下記参照
+- [docker-laravel をベースとした環境構築](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/Laravel/docker/docker-laravel/README.md)
 
 ### React 環境セットアップ
 Laravel UI を使って導入する。  
@@ -189,6 +144,16 @@ package.json の scripts に追加して、ライブラリインストール時�
 }
 ```
 
+## Remote Container 環境
+VSCode 拡張：[Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+以下をプロジェクトルートに配置
+- [.devcontainer/devcontainer.json](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.devcontainer/devcontainer.json)
+- [.devcontainer/docker-compose.yml](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.devcontainer/docker-compose.yml)
+- [example.code-workspace.json](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/example.code-workspace.json) ※名称は先頭部分はプロジェクト名に合わせてリネーム
+
+コンテナ内で使用する VSCode 拡張は devcontainer.json に記述してあるので、適宜使用する拡張に変える。
+
 ## ESLint + Prettier 導入
 ライブラリインストール
 ```
@@ -207,7 +172,7 @@ $ yarn add -D eslint-config-airbnb
 - [.prettierignore](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/.prettierignore)
 
 それぞれ VSCode 拡張を入れる。
-
+（devcontainer.json に記述済み）
 ### 設定の補足
 #### import/extensions と import/resolver
 前者は、インポート文にはファイル拡張子をつけることを強制するルール。  
@@ -241,11 +206,11 @@ Unable to resolve path to module './components/templates/Login'.eslint(import/no
 ```
 
 ## PHP Intelephense + phpcs + phpcbf 導入
-[README](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/README.md) を参照。
+[PHP 開発補助環境](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/README.md) を参照。
 
 ※[phpcs.xml](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/phpcs.xml)
 
-## テスト環境構築
+## テスト DB 環境構築
 docker-compose.yml にテスト用のコンテナ追記
 ```yml
 db-testing:
@@ -263,5 +228,5 @@ DB 接続情報を app コンテナの環境変数に設定しているので、
 そのため、PHPUnit の設定ファイルで強制上書きすることで、PHPUnit 実行時はこの強制上書き設定で実行するようにする（env タグで設定すること）  
 ※[phpunit.xml](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/phpunit.xml)
 
-CI 環境におけるテスト環境の注意点は [README-ci-cd](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/README-ci-cd.md) を参照。
+CI 環境におけるテスト DB の注意点は [React × Laravel CI/CD](https://github.com/h-yoshikawa44/dotfiles/blob/main/PHP/React-Laravel/README-ci-cd.md) を参照。
 

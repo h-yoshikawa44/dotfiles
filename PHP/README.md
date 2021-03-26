@@ -1,4 +1,4 @@
-# PHP
+# PHP 開発補助環境
 
 ## PHP Intelephense
 コード補完 + 静的解析を行うもの。
@@ -6,7 +6,7 @@
 ### VSCode 拡張
 [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
 
-PHP がある環境であれば、この拡張を入れるだけ動作する。
+PHP がある環境であれば、この拡張を入れるだけで動作する。
 
 #### Laravel の場合の対応
 Laravel の場合、この拡張をいれるだけではファザードやモデルのコード補完が動作しないので、ide-helper で生成するヘルパーファイルと組み合わせて使う。
@@ -23,13 +23,13 @@ $ php artisan ide-helper:models --nowrite
 ```
 
 それぞれ以下のファイルが自動生成される（このファイルは`.gitignore`に追加する）  
-`$ php artisan ide-helper:generate` → _ide_helper.php
-`$ php artisan ide-helper:models --nowrite` → _ide_helper_models.php
+- `$ php artisan ide-helper:generate` → _ide_helper.php
+- `$ php artisan ide-helper:models --nowrite` → _ide_helper_models.php
 
 ## phpcs と phpcbf
 それぞれ
 - phpcs：コーディング規約チェック
-- phpcbfコードフォーマッタ
+- phpcbf：コードフォーマッタ
 
 ```bash
 $ composer require --dev squizlabs/php_codesniffer
