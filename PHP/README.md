@@ -26,6 +26,14 @@ $ php artisan ide-helper:models --nowrite
 - `$ php artisan ide-helper:generate` → _ide_helper.php
 - `$ php artisan ide-helper:models --nowrite` → _ide_helper_models.php
 
+しかし、これでも`Auth::user()`からログインユーザ情報を取得した際に、`User`モデルの補完がきかないのか、定義したメソッドが認識されずにそんなメソッドはないとエラーが出ることがある。（処理としてはちゃんと動作する）  
+そんな時は、タイプヒントで一旦対応できる。
+```php
+/** @var App\User $user */
+$user = Auth::user();
+$user->memos()->save($memo);
+```
+
 ## phpcs と phpcbf
 それぞれ
 - phpcs：コーディング規約チェック
