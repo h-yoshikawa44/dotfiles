@@ -11,6 +11,7 @@ jobs:
   front-end-check:
     name: Front End Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: ./src
@@ -44,6 +45,7 @@ jobs:
   back-end-check:
     name: Back End Lint & Test
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: ./src
@@ -100,6 +102,7 @@ jobs:
     name: Deploy
     needs: [front-end-check, back-end-check]
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout

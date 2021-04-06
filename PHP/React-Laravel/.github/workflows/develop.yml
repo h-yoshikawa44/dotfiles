@@ -15,6 +15,7 @@ jobs:
   front-end-check:
     name: Front End Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Checkout
@@ -45,6 +46,7 @@ jobs:
   back-end-check:
     name: Back End Lint & Test
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     services:
       mysql:
