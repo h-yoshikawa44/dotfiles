@@ -1,0 +1,9 @@
+# Windows + GitHub ベース
+[core]
+        # ユーザ名部分は適宜置き換える
+        editor = \"C:\\Users\\{User}\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+[user]
+        email = 43331308+h-yoshikawa44@users.noreply.github.com
+        name = h-yoshikawa44
+[winUpdater]
+        recentlySeenVersion = 2.27.0.windows.1
