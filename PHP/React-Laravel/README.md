@@ -25,10 +25,10 @@ resources/js 配下に React のひな型が作成される
 $ yarn install
 ```
 
-Laravel 側では全てのリクエストを受けるようにする  
+Laravel 側では`api`プレフィックス以外の全てのリクエストを受けるようにする  
 src/routes/web.php
 ```php
-Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
+Route::get('/{any?}', fn() => view('index'))->where('any', '(?!api).+');
 ```
 
 最初からある welcome.blade.php をベースとして、起点となるビューを作成  
