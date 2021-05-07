@@ -26,6 +26,7 @@ $ yarn install
 ```
 
 Laravel 側では`api`プレフィックス以外の全てのリクエストを受けるようにする  
+（`api`プレフィックスを除外しておかないと、API ルートで where 制約にひっかかったリクエストがこのルートに来てしまうので注意）  
 src/routes/web.php
 ```php
 Route::get('/{any?}', fn() => view('index'))->where('any', '(?!api).+');
