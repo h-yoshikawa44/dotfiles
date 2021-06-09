@@ -13,7 +13,7 @@ package.json の scripts に追加して、ライブラリインストール時�
   "preinstall": "typesync || :"
 }
 ```
-`|| :`がついているのは、初回インストール時に typesync がないことによるエラー回避のため。
+`|| :`がついているのは、初回インストール時に typesync がないことによるエラー回避のため。  
 
 ## ESLint
 静的解析。
@@ -71,6 +71,7 @@ $ yarn build
   "extends": "next"
 }
 ```
+※この手順の前に追加したライブラリや、npm scripts が消えてないか確認しておくこと
 
 ### CLI
 例：Lint のみ
@@ -318,7 +319,7 @@ package.json にコマンド追加（CSS in JS 形式）
 VSCode のエディタ設定に追記
 ```json
 {
-	"css.validate": false,
+  "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
   "editor.codeActionsOnSave": {
@@ -341,3 +342,47 @@ VSCode のエディタ設定に追記
 `.stylelintrc.js`を使用。
 
 Prettier と衝突するルールがあるので、`stylelint-config-prettier`で無効にするようにしておく。
+
+
+## emotion
+CSS in JS の一種。
+### Next.js における導入手順
+本体のインストール
+```
+$ yarn add @emotion/react
+```
+基本的にはこれだけで使用できる。
+ただ、使用ファイルそれぞれに`/** @jsxImportSource @emotion/react */`というプラグマを書く必要がある。
+
+これを都度書かなくていいようにするには、以下の手順を行う。
+
+Babel 用の preset をインストール（core も必要になるので入れる）
+```
+$ yarn add -D @emotion/babel-preset-css-prop @babel/core
+```
+
+.babelrc を作成し、この preset を使うようにする
+```
+{
+  "presets": ["next/babel", "@emotion/babel-preset-css-prop"]
+}
+```
+
+tsconfig.json にもその旨追記
+```
+{
+  "compilerOptions": {
+    // ...
+    "jsxImportSource": "@emotion/react"
+  }
+}
+```
+
+### VSCode 拡張
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
+
+styled-components 形式コードの、シンタックスハイライトや入力補完を追加。
+
+入れるだけで OK。  
+styled-components 用であるが、emotion でも問題なく動作する。
+

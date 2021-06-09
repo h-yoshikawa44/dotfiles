@@ -77,4 +77,4 @@ export default (_: NextApiRequest, res: NextApiResponse) => {
 `src`ディレクトリを作り、その中に pages や styles ディレクトリを入れる。
 こうすると、ESLint 設定のパス指定などやりやすくなる。
 
-ESLint 等の設定は、[上階層の README](https://github.com/h-yoshikawa44/dotfiles/blob/main/TypeScript/React/README.md) を参照。
+ESLint 等の設定は、[上階層の README](https://github.com/h-yoshikawa44/dotfiles/blob/main/TypeScript/README.md) を参照。
