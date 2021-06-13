@@ -277,7 +277,7 @@ VSCode のデフォルトのフォーマッタに Prettier を設定。
 
 チェックから除外したいファイルは`.prettierignore`に書いておく。
 
-## StyleLint
+## StyleLint（フロントのみ）
 スタイル定義の静的解析。
 CSS in JS タイプのスタイル定義にも対応している。
 
@@ -287,13 +287,16 @@ $ yarn add -D stylelint stylelint-config-prettier stylelint-config-standard styl
 
 ### CLI
 例：チェックのみ（CSS in JS 形式）
-```
-$ yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}'"
+```bash
+$ yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}'
+
+# チェック構文として、CSS in JS 構文を強制
+$ yarn run -s stylelint --syntax 'css-in-js' './src/**/*.{js,jsx,ts,tsx}'
 ```
 
 例：チェック + 自動整形（CSS in JS 形式）
 ```
-$ yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}'" --fix
+$ yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}' --fix
 ```
 
 package.json にコマンド追加（CSS in JS 形式）
@@ -304,7 +307,7 @@ package.json にコマンド追加（CSS in JS 形式）
   .
   "lint-check": "yarn lint:eslint && yarn lint:stylelint && yarn check:prettier",
   "lint:eslint": "yarn run -s eslint './src/**/*.{js,jsx,ts,tsx}'",
-  "lint:stylelint": "yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}'",
+  "lint:stylelint": "yarn run -s stylelint --syntax 'css-in-js' './src/**/*.{js,jsx,ts,tsx}'",
   "check:prettier": "yarn run -s prettier --check './src/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}'",
   "fix": "yarn fix:eslint && yarn fix:stylelint && yarn fix:prettier",
   "fix:eslint": "yarn lint:eslint --fix",
@@ -343,12 +346,28 @@ VSCode のエディタ設定に追記
 
 Prettier と衝突するルールがあるので、`stylelint-config-prettier`で無効にするようにしておく。
 
+```js
+extends: [
+  'stylelint-config-standard',
+  'stylelint-config-recess-order',
+  'stylelint-config-prettier', // 追記
+],
+```
 
-## emotion
+## スタイル定義（フロントのみ）
+### リセット CSS
+ブラウザごとのデフォルト CSS による差異をなるべく減らすために、リセット CSS をグローバルで適用。  
+種類は色々あるのでお好みで。
+
+```bash
+$ yarn add modern-css-reset
+```
+
+### emotion
 CSS in JS の一種。
 ### Next.js における導入手順
 本体のインストール
-```
+```bash
 $ yarn add @emotion/react
 ```
 基本的にはこれだけで使用できる。
@@ -357,7 +376,7 @@ $ yarn add @emotion/react
 これを都度書かなくていいようにするには、以下の手順を行う。
 
 Babel 用の preset をインストール（core も必要になるので入れる）
-```
+```bash
 $ yarn add -D @emotion/babel-preset-css-prop @babel/core
 ```
 
@@ -369,7 +388,7 @@ $ yarn add -D @emotion/babel-preset-css-prop @babel/core
 ```
 
 tsconfig.json にもその旨追記
-```
+```json
 {
   "compilerOptions": {
     // ...
