@@ -1,5 +1,5 @@
 # Next.js（TypeScript）
-※create-next-app：10.2.4 における手順
+※create-next-app：11.0.0 における手順
 
 ## 環境構築
 create-next-app で雛形作成
@@ -38,7 +38,7 @@ If you are not trying to use TypeScript, please remove the tsconfig.json file fr
 
 その案内されたライブラリをインストールする。
 ```
-$ yarn add -D typescript @types/react
+$ yarn add --dev typescript @types/react
 ```
 
 再度サーバ再起動で Next.js は以下のことを行う。
@@ -52,25 +52,25 @@ next-env.d.ts によって、Next.js の型が TypeScript コンパイラによ�
 
 ・pages/_app.js → pages/_app.tsx にして、型追加
 ```tsx
-import { AppProps } from 'next/app'
+import { AppProps } from 'next/app';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
 }
 
-export default MyApp
+export default MyApp;
+
 ```
 
 ・pages/api/hello.js → pages/api/hello.ts へ
 ```tsx
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default (_: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ text: 'Hello' });
-};
-
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.status(200).json({ name: 'John Doe' });
+}
 ```
 
 ## その他調整

@@ -1,5 +1,21 @@
 # TypeScript 開発補助環境
 
+## 絶対パス指定
+インポート文で絶対パスを使えるようにする。  
+これで`@/`で`src`配下を参照できるようになる。
+
+```json
+"compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["src/*"]
+  },
+  .
+  .
+  .
+}
+```
+
 ## typesync
 ```
 $ yarn add -D typesync
@@ -23,9 +39,13 @@ package.json の scripts に追加して、ライブラリインストール時�
 create-react-app で作成した React プロジェクトでは、すでに最低限のセットアップ済み。
 
 #### Next.js
-create-next-app で作成した Next.js プロジェクトでは特にセットアップはされていない。
+create-next-app で作成した Next.js プロジェクトでは、v11.0.0 からはセットアップ済み。
+`$ yarn lint`コマンドですぐに実行できる。
 
-ただ、バージョン 10.2.4 においては、実験的に ESLint 設定を行う機能が追加されている。
+[`eslint-config-next`の設定内容](https://github.com/vercel/next.js/blob/canary/packages/eslint-config-next/index.js)
+
+---
+v10.2.4 の段階では、実験的に ESLint 設定を行う機能が追加されている状態。
 - [Next.js - ESLint in Next.js and Create Next App](https://github.com/vercel/next.js/discussions/24900)
 
 next.config.js ファイル作成
@@ -74,6 +94,9 @@ $ yarn build
 ※この手順の前に追加したライブラリや、npm scripts が消えてないか確認しておくこと
 
 ### CLI
+※直接 ESLint を実行する場合  
+（create-next-app v11.0.0 からはすでに`"lint": "next lint"`コマンドまで設定済み）
+
 例：Lint のみ
 ```bash
 $ yarn run -s eslint './src/**/*.{js,jsx,ts,tsx}'
@@ -123,8 +146,9 @@ package.json の scripts に登録しておくとよい
 ```
 
 ### 設定ファイルのカスタマイズ
-設定ファイルの形式は4パターンがあるが、`.eslintrc.js`を使用。
-なので、`package.json`側に定義されている設定は削除しておく。
+設定ファイルの形式は4パターンがあるが、`.eslintrc.js`を使用。  
+（create-next-app v11.0.0 からは`.eslintrc`がデフォルト）  
+なので、`package.json`側に定義されている設定がある場合は削除しておく。
 
 公開されている共有設定を使いたい場合は、インストールして適宜カスタマイズして使う。
 ```
@@ -230,7 +254,7 @@ ESLint とともに package.json の scripts に追加しておくとよい
   .
   .
   "lint-check": "yarn lint:eslint && yarn check:prettier",
-  "lint:eslint": "yarn run -s eslint './src/**/*.{js,jsx,ts,tsx}'",
+  "lint:eslint": "next lint",
   "check:prettier": "yarn run -s prettier --check './src/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}'",
   "fix": "yarn fix:eslint && yarn fix:prettier",
   "fix:eslint": "yarn lint:eslint --fix",
@@ -306,13 +330,9 @@ package.json にコマンド追加（CSS in JS 形式）
   .
   .
   "lint-check": "yarn lint:eslint && yarn lint:stylelint && yarn check:prettier",
-  "lint:eslint": "yarn run -s eslint './src/**/*.{js,jsx,ts,tsx}'",
   "lint:stylelint": "yarn run -s stylelint --syntax 'css-in-js' './src/**/*.{js,jsx,ts,tsx}'",
-  "check:prettier": "yarn run -s prettier --check './src/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}'",
   "fix": "yarn fix:eslint && yarn fix:stylelint && yarn fix:prettier",
-  "fix:eslint": "yarn lint:eslint --fix",
   "fix:stylelint": "yarn lint:stylelint --fix",
-  "fix:prettier": "yarn check:prettier --write"
 }
 ```
 
