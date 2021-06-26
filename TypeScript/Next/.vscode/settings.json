@@ -2,7 +2,6 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "emmet.triggerExpansionOnTab": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
@@ -28,4 +27,6 @@
     "editor.formatOnSave": true
   },
   "eslint.packageManager": "yarn",
+  // CSS in JSの時のみ
+  "stylelint.syntax": "css-in-js"
 }
