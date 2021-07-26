@@ -62,7 +62,7 @@
               "acrylicOpacity" : 0.7,
               "commandline" : "C:\\Program Files\\Git\\bin\\bash.exe --login -i",
               "cursorColor" : "#FFFFFF",
-              "fontFace" : "consolas",
+              "fontFace" : "Consolas",
               "fontSize" : 14,
               "icon" : "C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico",
               "name" : "Git Bash",
