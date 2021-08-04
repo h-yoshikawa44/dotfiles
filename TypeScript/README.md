@@ -2,8 +2,37 @@
 
 ## 絶対パス指定
 インポート文で絶対パスを使えるようにする。  
+
+### React
+これで`src`からの絶対パスで記述できるようになる。
+
+tsconfig.json
+```json
+"compilerOptions": {
+  "baseUrl": "src",
+  .
+  .
+  .
+}
+```
+
+eslintrc
+```js
+settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.tsx', '.ts'],
+        paths: ['src'], // 追加
+      },
+    },
+  },
+```
+
+### Next.js
+エイリアスパターン。  
 これで`@/`で`src`配下を参照できるようになる。
 
+tsconfig.json
 ```json
 "compilerOptions": {
   "baseUrl": ".",

@@ -2,8 +2,8 @@ name: Develop Check
 on:
   push:
     branches-ignore:
-      - master
-      - release/**
+      - main
+
 env:
   project-name: test-project
 
@@ -18,16 +18,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 14.x
 
       - name: Get Yarn Cache Directory Path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache Node Modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
@@ -37,14 +37,15 @@ jobs:
       - name: Package Install
         run: yarn install
 
-      - name: Lint
-        run: yarn lint
+      - name: Lint & Format Check
+        run: yarn lint-check
 
       - name: Slack Notification by NonSuccess
-        uses: 8398a7/action-slack@v2
+        uses: 8398a7/action-slack@v3
         if: success() != true
         with:
           status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
           author_name: 'check'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

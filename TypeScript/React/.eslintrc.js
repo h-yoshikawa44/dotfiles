@@ -53,6 +53,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.tsx', '.ts'],
       },
     },
+    // なくてもいいかも（Warning 出なくなった？）
     react: {
       version: '17.0.2',
     },
