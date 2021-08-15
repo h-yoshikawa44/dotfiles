@@ -102,6 +102,14 @@ jobs:
       #   env:
       #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
+      # ビルド & gh-pagesを使って GitHub Pages にデプロイ（ビルドとデプロイを行う yarn deploy コマンドが定義してあること）
+      # - name: Build & Deploy to GitHub Pages
+      #   run: |
+      #     git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      #     yarn deploy -u "github-actions-bot <support+actions@github.com>" -m "${{ github.event.head_commit.message }}"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Slack Notification
         uses: 8398a7/action-slack@v3
         if: always()
