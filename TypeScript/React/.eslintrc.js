@@ -50,7 +50,8 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.tsx', '.ts'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['src'],
       },
     },
     // なくてもいいかも（Warning 出なくなった？）
