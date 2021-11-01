@@ -1,12 +1,12 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2021-10-31T14:27:27.400-00:00",
+	"CreationDate" : "2021-11-01T13:42:00.400-00:00",
 	"Sources" :
 	[
 		{
 			"Packages" :
 			[
-        // base
+        // ========== base ==========
         {
 					"PackageIdentifier" : "Google.Chrome"
 				},
@@ -25,21 +25,31 @@
         {
 					"PackageIdentifier" : "Google.Drive"
 				},
-        // life
+        {
+          // iCloud
+					"PackageIdentifier" : "9PKTQ5699M62",
+				},
+        // ========== life ==========
+        {
+					"PackageIdentifier" : "Apple.iTunes"
+				},
         {
 					"PackageIdentifier" : "Amazon.Kindle"
 				},
         {
 					"PackageIdentifier" : "Notion.Notion"
 				},
-        // tool
+        {
+					"PackageIdentifier" : "Adobe.AdobeAcrobatReaderDC"
+				},
+        // ========== tool ==========
         {
 					"PackageIdentifier" : "7zip.7zip"
 				},
         {
 					"PackageIdentifier" : "NickeManarin.ScreenToGif"
 				},
-        // development
+        // ========== development ==========
         {
 					"PackageIdentifier" : "GnuWin32.Make"
 				},
@@ -54,7 +64,7 @@
 				},
 				{
 					"PackageIdentifier" : "Microsoft.VisualStudioCode"
-				}
+				},
         {
 					"PackageIdentifier" : "ResponsivelyApp.ResponsivelyApp"
 				},
@@ -64,6 +74,10 @@
 				{
 					"PackageIdentifier" : "TablePlus.TablePlus"
 				},
+        // ========== WSL ==========
+        {
+					"PackageIdentifier" : "Canonical.Ubuntu"
+				}
 			],
 			"SourceDetails" :
 			{
