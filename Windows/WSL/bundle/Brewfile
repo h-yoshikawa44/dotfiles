@@ -1,3 +1,11 @@
+tap "homebrew/bundle"
+
+## ========== Base ==========
+brew "fd"
+brew "bat"
+brew "exa"
+brew "ripgrep"
+
 ## ========== Language ==========
 brew "gcc"
 brew "asdf"

@@ -1,0 +1,39 @@
+tap "homebrew/cask"
+tap "homebrew/bundle"
+tap "homebrew/services"
+cask_args appdir: "/Applications"
+
+## ========== Base ==========
+brew "fd"
+brew "bat"
+brew "exa"
+brew "git"
+brew "ripgrep"
+
+## ========== Shell ==========
+brew "starship"
+
+## ========== Fonts ==========
+tap  "homebrew/cask-fonts"
+cask "font-hackgen"
+cask "font-hackgen-nerd"
+
+## ========== Language & Databases ==========
+brew "gcc"
+brew "asdf"
+
+## ========== Applications ==========
+cask "zoom"
+cask "slack"
+cask "alfred"
+cask "docker"
+cask "iterm2"
+cask "postman"
+cask "rectangle"
+cask "appcleaner"
+cask "sequel-ace"
+cask "table-plus"
+cask "google-chrome"
+cask "karabiner-elements"
+cask "visual-studio-code"
+cask "google-japanese-ime"
