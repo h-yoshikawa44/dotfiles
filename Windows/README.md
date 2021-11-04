@@ -6,11 +6,12 @@
 3. 左メニューの「Windows の機能の有効化または無効化」を選択
 4. 機能一覧の中から「Linux 用 Windows サブシステム」にチェックをつけて「OK」
 
-### セットアップ
+### 各種インストール
+※この dotfiles リポジトリをローカルに落としてきた上で実行すること
 
-PowerShell で実行
+PowerShell で実行例（リポジトリトップからの例）
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/h-yoshikawa44/dotfiles/main/Windows/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 ```
 
 ### 非自動化分
