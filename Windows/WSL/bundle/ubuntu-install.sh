@@ -21,4 +21,5 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 ## ========== settings ==========
 curl "${$DOTFILESRAW}/Windows/WSL/.bashrc" -o "${HOME}/.bashrc"
 curl "${$DOTFILESRAW}/Windows/WSL/.profile" -o "${HOME}/.profile"
+curl "${$DOTFILESRAW}/Windows/WSL/.gitconfig" -o "${HOME}/.gitconfig"
 curl "${$DOTFILESRAW}/Windows/WSL/config/starship.toml" -o "${HOME}/.config/starship.toml"
