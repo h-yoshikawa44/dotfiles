@@ -60,6 +60,9 @@
 					"PackageIdentifier" : "Microsoft.VC++2005Redist-x86"
 				},
         {
+					"PackageIdentifier" : "Volta.Volta"
+				},
+        {
 					"PackageIdentifier" : "Docker.DockerDesktop"
 				},
 				{
