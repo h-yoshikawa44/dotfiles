@@ -34,3 +34,10 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 #### エディタ
 - [Stoplight Studio](https://stoplight.io/studio/)：Open API エディタ
 
+#### シェル
+- [Starship](https://starship.rs/)：プロンプト
+  - GitHub から直接 ~~x86_64-pc-windows-msvc.zip ファイルを取得
+  - C:\Program Files\Starship 配下に展開
+  - システム環境変数の PATH に C:\Program Files\Starship を追加
+  - Windows Terminal 自体を再起動
+
