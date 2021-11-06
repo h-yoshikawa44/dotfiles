@@ -20,6 +20,9 @@
 					"PackageIdentifier" : "Microsoft.PowerToys"
 				},
         {
+					"PackageIdentifier" : "OliverSchwendener.ueli"
+				},
+        {
 					"PackageIdentifier" : "Microsoft.OneDrive"
 				},
         {
@@ -27,7 +30,7 @@
 				},
         {
           // iCloud
-					"PackageIdentifier" : "9PKTQ5699M62",
+					"PackageIdentifier" : "9PKTQ5699M62"
 				},
         // ========== life ==========
         {

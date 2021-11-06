@@ -17,6 +17,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 ### 非自動化分
 #### 基本環境
 - [X-Bows Driver](https://x-bows.com/pages/software)：キーカスタム（X-Bows v2 までのドライバ ※v3から [QMK ベース](https://x-bows.com/blogs/blog/how-to-use-qmk-keyboard)）
+- [Ueli](https://ueli.app/#/)：ランチャー（設定反映のみ非自動・タスクバーインジケーターから設定を開いて app_config/ueli.config.json をインポート）
 
 #### セキュリティ
 - [カスペルスキー インターネット セキュリティ](https://www.kaspersky.co.jp/downloads/thank-you/internet-security)：ウイルス対策
