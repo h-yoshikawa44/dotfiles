@@ -1,68 +1,75 @@
-# HTML・CSS 開発補助環境
+# HTML・CSS・JavaScript 開発補助環境
 
-## Prettier
+## Prettier・StyleLint・ESLint
+### インストール
+必要に応じてインストール
 ```
-$ yarn add -D prettier
+$ yarn add -D prettier stylelint stylelint-config-prettier stylelint-config-recess-order stylelint-config-standard stylelint-order eslint eslint-config-prettier
 ```
-
 ### CLI
+チェックコマンド例
 ```
-$ yarn run -s prettier --check './**/*.{html,js,ts,json}',
+$ yarn run -s prettier --check './**/*.{html,js,ts,json}'
+
+$ yarn run -s stylelint './css/**/*.css'
+
+$ yarn run -s eslint './js/**/*.js'
 ```
 
 package.json
 ```json
-"scripts": {
-  .
-  .
-  .
-  "check:prettier": "yarn run -s prettier --check './**/*.{html,js,ts,json}'",
-  "fix:prettier": "yarn check:prettier --write"
+{
+  "scripts": {
+    "lint-check": "yarn lint:eslint && yarn lint:stylelint && yarn check:prettier",
+    "lint:eslint": "eslint \"./js/**/*.js\"",
+    "lint:stylelint": "stylelint \"./css/**/*.css\"",
+    "check:prettier": "prettier --check \"./**/*.{html,js,ts,json}\"",
+    "fix": "yarn fix:eslint && yarn fix:stylelint && yarn fix:prettier",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:stylelint": "yarn lint:stylelint --fix",
+    "fix:prettier": "yarn check:prettier --write"
+  }
 }
 ```
 
 ### VSCode 拡張
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-```json
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-}
-```
-
-## StyleLint
-```
-$ yarn add -D stylelint stylelint-config-prettier stylelint-config-recess-order stylelint-config-standard stylelint-order
-```
-
-### CLI
-```
-$ yarn run -s stylelint './css/**/*.css'
-```
-
-package.json
-```json
-"scripts": {
-  .
-  .
-  .
-  "lint-check": "yarn lint:stylelint && yarn check:prettier",
-  "lint:stylelint": "yarn run -s stylelint './css/**/*.css'",
-  "fix:stylelint": "yarn lint:stylelint --fix",
-}
-```
-
-### VSCode 拡張
 - [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-VSCode のエディタ設定に追記
+
+settings.json
 ```json
 {
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
+  "css.validate": false, // StyleLint を使うので、デフォルトの構文チェックを無効化
+  "less.validate": false, // // StyleLint を使うので、デフォルトの構文チェックを無効化
+  "scss.validate": false, // // StyleLint を使うので、デフォルトの構文チェックを無効化
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": true
+    "source.fixAll.eslint": true, // ファイル保存時に ESLint 実行
+    "source.fixAll.stylelint": true // ファイル保存時に StyleLint 実行
   },
+  "editor.formatOnSave": false, // デフォルトのフォーマットを無効化
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // デフォルトフォーマッターに Pretter を設定
+  "[html]": {
+    "editor.formatOnSave": true // html ファイル保存時に Prettier 実行
+  },
+  "[css]": {
+    "editor.formatOnSave": true // css ファイル保存時に Prettier 実行
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true // js ファイル保存時に Prettier 実行
+  },
+  "[json]": {
+    "editor.formatOnSave": true // json ファイル保存時に Prettier 実行
+  },
+  "html-css-class-completion.enableEmmetSupport": true, // Emmet でもクラス補完を使えるようにする
+  "eslint.packageManager": "yarn" // ESLint のパッケージマネージャ
+}
+```
+
+拡張の v1.1.0 以降であれば、自動で node_modules 配下の StyleLint を検出してくれるはずであるが、自動検出に失敗するなら明示的に追記。
+```json
+{
+  "stylelint.stylelintPath": "./node_modules/stylelint"
 }
 ```
