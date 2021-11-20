@@ -73,3 +73,39 @@ settings.json
   "stylelint.stylelintPath": "./node_modules/stylelint"
 }
 ```
+
+## simple-git-hooks + lint-staged
+```
+$ yarn add -D simple-git-hooks lint-staged
+```
+
+```json
+{
+  "scripts": {
+    "prepare": "simple-git-hooks || echo 'Can not set git hooks'"
+  }
+  .
+  .
+  .
+  "simple-git-hooks": {
+    "pre-commit": "yarn run -s lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "prettier --write --loglevel=error",
+      "eslint --fix --quiet"
+    ],
+    "css/**/*.css": [
+      "stylelint --fix --quiet"
+    ],
+    "./**/*.{html,json}": [
+      "prettier --write --loglevel=error"
+    ]
+  },
+}
+```
+
+設定反映
+```
+$ yarn run -s simple-git-hooks
+```
