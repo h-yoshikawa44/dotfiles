@@ -27,6 +27,6 @@
     "editor.formatOnSave": true
   },
   "eslint.packageManager": "yarn",
-  // CSS in JSの時のみ
-  "stylelint.syntax": "css-in-js"
+  // v14 + CSS in JSの時のみ
+  "stylelint.validate": ["css", "typescript", "typescriptreact"]
 }

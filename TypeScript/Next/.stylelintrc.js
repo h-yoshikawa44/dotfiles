@@ -5,9 +5,12 @@ module.exports = {
     'stylelint-config-prettier',
   ],
   plugins: ['stylelint-order'],
+  // v14 + CSS in JS の場合のみ
+  overrides: [
+    {
+      files: ['**/*.{ts,tsx}'],
+      customSyntax: '@stylelint/postcss-css-in-js',
+    },
+  ],
   ignoreFiles: ['**/node_modules/**'],
-  // CSS in JS の時はPrettier側で設定があるので不要
-  rules: {
-    'string-quotes': 'single',
-  },
 };

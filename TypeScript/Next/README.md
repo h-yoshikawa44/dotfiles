@@ -1,5 +1,5 @@
 # Next.js（TypeScript）
-※create-next-app：11.0.0 における手順
+※create-next-app：12.0.4 における手順
 
 ## 環境構築
 create-next-app で雛形作成
@@ -46,6 +46,8 @@ $ yarn add --dev typescript @types/react
 - next-env.d.ts：ファイルを作成
 
 next-env.d.ts によって、Next.js の型が TypeScript コンパイラによって確実に取得されるようになる。このファイルには触れないこと。
+
+tsconfig.json の strict モードを有効化しておいた方がいいかも。
 
 ### 既存ファイルの TypeScript 化
 ・pages/index.js → pages/index.tsx へ
