@@ -1,59 +1,18 @@
-name: Main Check & Deploy
+name: Deploy
 on:
-  push:
+  workflow_run:
+    workflows:
+      - "Develop Check"
     branches:
       - main
-env:
-  project-name: ga-test-project
+    types:
+      - completed
 
 jobs:
-  check:
-    name: Lint
-    runs-on: ubuntu-20.04
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
-
-      - name: Get Yarn Cache Directory Path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Node Modules
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.project-name }}-
-
-      - name: Package Install
-        run: yarn install
-
-      - name: Lint & Format Check
-        run: yarn lint-check
-
-      - name: Slack Notification by NonSuccess
-        uses: 8398a7/action-slack@v3
-        if: success() != true
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow
-          author_name: 'check'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
   deploy:
     name: Build & Deploy
-    needs: check
     runs-on: ubuntu-20.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     timeout-minutes: 5
 
     steps:
@@ -63,19 +22,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
-
-      - name: Get Yarn Cache Directory Path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Node Modules
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.project-name }}-
+          node-version: 16.x
+          cache: yarn
 
       - name: Package Install
         run: yarn install
@@ -124,7 +72,7 @@ jobs:
       # - name: Build & Deploy to GitHub Pages
       #   run: |
       #     git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      #     yarn deploy -u "github-actions-bot <support+actions@github.com>" -m "${{ github.event.head_commit.message }}"
+      #     yarn deploy -u "github-actions-bot <support+actions@github.com>" -m "${{ github.event.workflow_run.head_commit.message }}"
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
