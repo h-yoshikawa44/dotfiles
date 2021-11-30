@@ -33,8 +33,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 - [CyberLink PowerDVD 10](https://jp.cyberlink.com/products/powerdvd-ultra/features_ja_JP.html)：DVD・Blu-ray 再生（Blu-ray 端末付属 CD より）
 - [CyberLink Media Suite 10](https://dl.logitec.co.jp/software.php?pn=LST-D-497)：書き込みソフト（Blu-ray 端末付属 CD より）
 
-#### エディタ
+#### 開発
 - [Stoplight Studio](https://stoplight.io/studio/)：Open API エディタ
+- [ngrok](https://ngrok.com/)：ローカルサーバを公開
 
 #### シェル
 - [Starship](https://starship.rs/)：プロンプト
