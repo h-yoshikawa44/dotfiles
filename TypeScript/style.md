@@ -44,7 +44,7 @@ tsconfig.json にもその旨追記
 ```
 
 ### VSCode 拡張
-- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components)
 
 styled-components 形式コードの、シンタックスハイライトや入力補完を追加。
 
