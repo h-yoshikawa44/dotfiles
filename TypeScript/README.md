@@ -55,10 +55,10 @@ package.json の scripts に追加して、ライブラリインストール時�
   .
   .
   .
-  "preinstall": "typesync || :"
+  "preinstall": "typesync || echo 'skip typesync'"
 }
 ```
-`|| :`がついているのは、初回インストール時に typesync がないことによるエラー回避のため。  
+`|| echo 'skip typesync'`がついているのは、初回インストール時に typesync がないことによるエラー回避のため。  
 
 ## ESLint・Prettier
 静的解析 + フォーマッタ
