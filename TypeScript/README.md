@@ -366,5 +366,33 @@ module.exports = {
   ],
 ```
 
+## Pre Commit 設定
+```bash
+$ yarn add -D simple-git-hooks lint-staged
+```
+
+package.json に追記（CSS in JS の例）
+```json
+"scripts": {
+  ...
+  "prepare": "simple-git-hooks || echo 'Can not set git hooks'"
+}
+
+"simple-git-hooks": {
+  "pre-commit": "yarn run -s lint-staged"
+},
+"lint-staged": {
+  "src/**/*.{js,jsx,ts,tsx}": [
+    "prettier --write --loglevel=error",
+    "eslint --fix --quiet",
+    "stylelint --fix --quiet"
+  ],
+  "./**/*.{html,gql,graphql,json}": [
+    "prettier --write --loglevel=error"
+  ]
+}
+```
+
 ---
-- [スタイルに関する環境構築](https://github.com/h-yoshikawa44/ch-portfolio/blob/main/TypeScript/style.md)
+
+- [スタイルに関する環境構築](https://github.com/h-yoshikawa44/dotfiles/blob/main/TypeScript/style.md)

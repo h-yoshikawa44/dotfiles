@@ -1,5 +1,5 @@
 # Next.js（TypeScript）
-※create-next-app：12.0.4 における手順
+※create-next-app：12.0.7 における手順
 
 ## 環境構築
 create-next-app で雛形作成
