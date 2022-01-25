@@ -20,6 +20,10 @@
 					"PackageIdentifier" : "Microsoft.PowerToys"
 				},
         {
+          // Devtoys
+					"PackageIdentifier" : "9PGCV4V3BK4W"
+				},
+        {
 					"PackageIdentifier" : "OliverSchwendener.ueli"
 				},
         {
