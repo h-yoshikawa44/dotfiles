@@ -11,5 +11,5 @@ brew upgrade
 brew bundle --file "${EXEPATH}"/Brewfile
 
 ## ========== settings ==========
-curl "${$DOTFILESRAW}/Mac/.zprofile" -o "${HOME}/.zprofile"
+curl "${$DOTFILESRAW}/Mac/.zshrc" -o "${HOME}/.zshrc"
 curl "${$DOTFILESRAW}/Mac/.gitconfig" -o "${HOME}/.gitconfig"
