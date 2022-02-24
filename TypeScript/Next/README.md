@@ -1,5 +1,5 @@
 # Next.js（TypeScript）
-※create-next-app：12.0.7 における手順
+※create-next-app：12.1.0 における手順
 
 ## 環境構築
 create-next-app で雛形作成
@@ -31,14 +31,14 @@ It looks like you're trying to use TypeScript but do not have the required packa
 
 Please install typescript and @types/react by running:
 
-        yarn add --dev typescript @types/react
+        yarn add --dev typescript @types/react @types/node
 
 If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your pages directory).
 ```
 
 その案内されたライブラリをインストールする。
 ```
-$ yarn add --dev typescript @types/react
+$ yarn add --dev typescript @types/react @types/node
 ```
 
 再度サーバ再起動で Next.js は以下のことを行う。
