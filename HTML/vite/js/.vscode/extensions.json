@@ -6,7 +6,6 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "naumovs.color-highlight",
-    "formulahendry.auto-rename-tag",
     "zignd.html-css-class-completion",
     "mkaufman.htmlhint",
     "dbaeumer.vscode-eslint",
