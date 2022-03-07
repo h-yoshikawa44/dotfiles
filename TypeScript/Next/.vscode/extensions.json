@@ -6,7 +6,6 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "naumovs.color-highlight",
-    "formulahendry.auto-rename-tag",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
