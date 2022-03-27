@@ -22,6 +22,7 @@ cask "font-hackgen-nerd"
 ## ========== Language & Databases ==========
 brew "gcc"
 brew "asdf"
+brew "anyenv" # asdf とどっちかでもいいかも
 
 ## ========== Applications ==========
 cask "zoom"
@@ -29,6 +30,7 @@ cask "slack"
 cask "alfred"
 cask "docker"
 cask "iterm2"
+cask "devtoys"
 cask "postman"
 cask "rectangle"
 cask "appcleaner"
