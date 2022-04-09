@@ -17,8 +17,24 @@ CSS in JS の一種。
 $ yarn add @emotion/react
 ```
 基本的にはこれだけで使用できる。
-ただ、使用ファイルそれぞれに`/** @jsxImportSource @emotion/react */`というプラグマを書く必要がある。
 
+ただ、CSS Prop の機能を使うには、使用ファイルそれぞれに`/** @jsxImportSource @emotion/react */`というプラグマを書く必要がある。
+Next v12.1.1 からは emotion の SWC サポートが入ったので、その機能を有効化するだけで OK っぽい。  
+（機能を有効化しなくても普通に CSS Prop 使えてる感じではあったけど）
+
+tsconfig.json に追記は必要  
+（これがないと CSS Prop を書こうとしても、そんなプロパティはないとエラーになる）
+```json
+{
+  "compilerOptions": {
+    // ...
+    "jsxImportSource": "@emotion/react"
+  }
+}
+```
+
+<details>
+<summary>v12.1.0までで CSS Prop を使うために必要な Babel プラグイン設定</summary>
 これを都度書かなくていいようにするには、以下の手順を行う。
 
 Babel 用の preset をインストール（core も必要になるので入れる）
@@ -33,15 +49,7 @@ $ yarn add -D @emotion/babel-preset-css-prop @babel/core
 }
 ```
 
-tsconfig.json にもその旨追記
-```json
-{
-  "compilerOptions": {
-    // ...
-    "jsxImportSource": "@emotion/react"
-  }
-}
-```
+</details>
 
 ### VSCode 拡張
 - [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components)
