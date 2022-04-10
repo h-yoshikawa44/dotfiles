@@ -10,6 +10,11 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew upgrade
 brew bundle --file "${EXEPATH}"/Brewfile
 
+## ========== cli ==========
+### fnm か Volta いずれか
+curl -fsSL https://fnm.vercel.app/install | bash
+curl https://get.volta.sh | bash
+
 ## ========== settings ==========
 curl "${$DOTFILESRAW}/Mac/.zshrc" -o "${HOME}/.zshrc"
 curl "${$DOTFILESRAW}/Mac/.gitconfig" -o "${HOME}/.gitconfig"
