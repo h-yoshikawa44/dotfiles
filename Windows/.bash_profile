@@ -12,3 +12,7 @@ then
     [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
   done
 fi
+
+## Terraform
+### USERの部分は置換すること
+complete -C C:/Users/{USER}/development/library/terraform/terraform.exe terraform.exe
