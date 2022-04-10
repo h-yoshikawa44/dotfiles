@@ -84,6 +84,9 @@
 				{
 					"PackageIdentifier" : "TablePlus.TablePlus"
 				},
+        {
+					"PackageIdentifier" : "Amazon.AWSCLI"
+				},
         // ========== WSL ==========
         {
 					"PackageIdentifier" : "Canonical.Ubuntu"
