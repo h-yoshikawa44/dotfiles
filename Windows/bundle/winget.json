@@ -1,8 +1,28 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2021-11-01T13:42:00.400-00:00",
+	"CreationDate" : "2022-07-26T23:08:13.219-00:00",
 	"Sources" :
 	[
+    {
+			"Packages" :
+			[
+				{
+           // Devtoys
+					"PackageIdentifier" : "9PGCV4V3BK4W"
+				},
+				{
+           // iCloud
+					"PackageIdentifier" : "9PKTQ5699M62"
+				}
+			],
+			"SourceDetails" :
+			{
+				"Argument" : "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+				"Identifier" : "StoreEdgeFD",
+				"Name" : "msstore",
+				"Type" : "Microsoft.Rest"
+			}
+		},
 		{
 			"Packages" :
 			[
@@ -14,14 +34,13 @@
 					"PackageIdentifier" : "Microsoft.Edge"
 				},
         {
+					"PackageIdentifier" : "Microsoft.EdgeWebView2Runtime"
+				},
+        {
 					"PackageIdentifier" : "Microsoft.WindowsTerminal"
 				},
         {
 					"PackageIdentifier" : "Microsoft.PowerToys"
-				},
-        {
-          // Devtoys
-					"PackageIdentifier" : "9PGCV4V3BK4W"
 				},
         {
 					"PackageIdentifier" : "OliverSchwendener.ueli"
@@ -32,10 +51,6 @@
         {
 					"PackageIdentifier" : "Google.Drive"
 				},
-        {
-          // iCloud
-					"PackageIdentifier" : "9PKTQ5699M62"
-				},
         // ========== life ==========
         {
 					"PackageIdentifier" : "Apple.iTunes"
@@ -45,9 +60,6 @@
 				},
         {
 					"PackageIdentifier" : "Notion.Notion"
-				},
-        {
-					"PackageIdentifier" : "Adobe.AdobeAcrobatReaderDC"
 				},
         // ========== tool ==========
         {
@@ -64,7 +76,16 @@
 					"PackageIdentifier" : "Git.Git"
 				},
         {
+					"PackageIdentifier" : "Starship.Starship"
+				},
+        {
 					"PackageIdentifier" : "Microsoft.VC++2005Redist-x86"
+				},
+        {
+					"PackageIdentifier" : "Microsoft.VC++2015-2022Redist-x64"
+				},
+        {
+					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
 				},
         {
 					"PackageIdentifier" : "Volta.Volta"
@@ -101,5 +122,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.1.12653"
+	"WinGetVersion" : "1.2.11601"
 }

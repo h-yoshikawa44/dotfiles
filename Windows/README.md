@@ -21,9 +21,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
   - v2 マクロは app_config 配下の .cms ファイル（US 配列用）
 - [Ueli](https://ueli.app/#/)：ランチャー（設定反映のみ非自動・タスクバーインジケーターから設定を開いて app_config/ueli.config.json をインポート）
 
-#### セキュリティ
-- [カスペルスキー インターネット セキュリティ](https://www.kaspersky.co.jp/downloads/thank-you/internet-security)：ウイルス対策
-
 #### ストレージ
 - [BUFFALO スマートツインズ](https://www.buffalo.jp/support/download/detail/?dl_contents_id=5130)：バックアップ
 - [BUFFALO おでかけロック設定](https://www.buffalo.jp/support/download/detail/?dl_contents_id=2795)：ストレージロック
@@ -40,8 +37,5 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 
 #### シェル
 - [Starship](https://starship.rs/)：プロンプト
-  - GitHub から直接 ~~x86_64-pc-windows-msvc.zip ファイルを取得
-  - C:\Program Files\Starship 配下に展開
-  - システム環境変数の PATH に C:\Program Files\Starship を追加
-  - Windows Terminal 自体を再起動
+  - winget でインストール後、~/.config を作り、その下に starship.toml ファイルを配置
 
