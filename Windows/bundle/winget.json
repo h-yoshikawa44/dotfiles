@@ -68,6 +68,9 @@
         {
 					"PackageIdentifier" : "NickeManarin.ScreenToGif"
 				},
+        {
+					"PackageIdentifier" : "Adobe.Acrobat.Reader.64-bit"
+				},
         // ========== development ==========
         {
 					"PackageIdentifier" : "GnuWin32.Make"

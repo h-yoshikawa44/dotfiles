@@ -5,9 +5,6 @@ $dotfilesRaw = "https://raw.githubusercontent.com/h-yoshikawa44/dotfiles/main"
 winget source update
 winget import -i "$($exePath)/winget.json"
 
-# インポートファイルではロケールサポートがないようなので別でインストール
-winget install --id  Adobe.AdobeAcrobatReaderDC --locale ja-JP
-
 ## ========== settings ==========
 curl "$($dotfilesRaw)/Windows/app_config/win-terminal.settings.json" -o $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -UseBasicParsing
 
