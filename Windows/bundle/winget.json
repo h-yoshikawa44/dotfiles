@@ -110,10 +110,6 @@
 				},
         {
 					"PackageIdentifier" : "Amazon.AWSCLI"
-				},
-        // ========== WSL ==========
-        {
-					"PackageIdentifier" : "Canonical.Ubuntu"
 				}
 			],
 			"SourceDetails" :

@@ -16,3 +16,6 @@ curl "$($dotfilesRaw)/Windows/.gitconfig" -o $env:USERPROFILE\.gitconfig -UseBas
 curl "$($dotfilesRaw)/Windows/config/starship.toml" -o $env:USERPROFILE\.config\starship.toml -UseBasicParsing
 
 # VSCode設定はGitHubアカウントで同期する
+
+##  ========== WSL2 ==========
+wsl --install -d Ubuntu
