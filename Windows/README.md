@@ -10,6 +10,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 
 ### 非自動化分
 #### 基本環境
+- Linux カーネル更新プログラム：[ここ](https://docs.microsoft.com/ja-jp/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)からインストール（Docker に必要）
 - [HackGen](https://github.com/yuru7/HackGen/releases)：フォント（GitHub から通常版・Nerd 版ともに直接ダウンロードして、コントロールパネルのフォントに配置）
 - [X-Bows Driver](https://x-bows.com/pages/software)：キーカスタム（X-Bows v2 までのドライバ ※v3から [QMK ベース](https://x-bows.com/blogs/blog/how-to-use-qmk-keyboard)）
   - v2 マクロは app_config 配下の .cms ファイル（US 配列用）
