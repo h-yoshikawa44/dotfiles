@@ -7,8 +7,11 @@ cask_args appdir: "/Applications"
 brew "fd"
 brew "bat"
 brew "exa"
+brew "ghq"
 brew "git"
-brew 'mas'
+brew "mas"
+brew "peco"
+brew "tig"
 brew "ripgrep"
 
 ## ========== Shell ==========
@@ -25,6 +28,7 @@ brew "asdf"
 brew "anyenv" # asdf とどっちかでもいいかも
 
 ## ========== Applications ==========
+cask "fig"
 cask "zoom"
 cask "slack"
 cask "alfred"

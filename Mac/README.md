@@ -12,7 +12,3 @@ $ xcode-select install
 ```bash
 $ bin/zsh ./Mac/bundle/install.sh
 ```
-
-### 非自動化分
-#### ターミナル
-- [Fig](https://fig.io/)：ターミナルの入力補完
