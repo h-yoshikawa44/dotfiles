@@ -14,11 +14,14 @@ zle -N peco-ghq
 bindkey '^]' peco-ghq
 
 # history + peco
-function history-all () {
-  history -E 1 | peco
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
 }
-zle -N history-all
-bindkey '^h' history-all
+
+zle -N peco-history-selection
+bindkey '^h' peco-history-selection
 
 # Homebrew
 ## Command Completions
