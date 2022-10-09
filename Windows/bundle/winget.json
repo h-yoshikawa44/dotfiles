@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2022-07-26T23:08:13.219-00:00",
+	"CreationDate" : "2022-10-09T18:02:48.952-00:00",
 	"Sources" :
 	[
     {
@@ -28,6 +28,9 @@
 			[
         // ========== base ==========
         {
+					"PackageIdentifier" : "Canonical.Ubuntu"
+				},
+        {
 					"PackageIdentifier" : "Google.Chrome"
 				},
         {
@@ -50,6 +53,9 @@
 				},
         {
 					"PackageIdentifier" : "Google.Drive"
+				},
+        {
+					"PackageIdentifier" : "Starship.Starship"
 				},
         // ========== life ==========
         {
@@ -82,10 +88,13 @@
 					"PackageIdentifier" : "Starship.Starship"
 				},
         {
-					"PackageIdentifier" : "Microsoft.VC++2005Redist-x86"
+					"PackageIdentifier" : "Microsoft.VCRedist.2005.x86"
 				},
         {
-					"PackageIdentifier" : "Microsoft.VC++2015-2022Redist-x64"
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
+				},
+        {
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x86"
 				},
         {
 					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
@@ -114,12 +123,12 @@
 			],
 			"SourceDetails" :
 			{
-				"Argument" : "https://winget.azureedge.net/cache",
+				"Argument" : "https://cdn.winget.microsoft.com/cache",
 				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
 				"Name" : "winget",
 				"Type" : "Microsoft.PreIndexed.Package"
 			}
 		}
 	],
-	"WinGetVersion" : "1.2.11601"
+	"WinGetVersion" : "1.3.2691"
 }
