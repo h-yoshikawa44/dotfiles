@@ -17,6 +17,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
   - Windows 本体の言語設定から日本語キーボードレイアウトを US 配列にする
   - Windows 本体設定の Microsoft IME → キーとタッチのカスタマイズ → 各キーに好み機能を割り当てるを ON → Ctrl + Space を IME-オン/オフ にしておく
 - [Ueli](https://ueli.app/#/)：ランチャー（設定反映のみ非自動・タスクバーインジケーターから設定を開いて app_config/ueli.config.json をインポート）
+- make：
+  - winget でインストールできるが、パスが通ってない場合があるので通す（例：`C:\Program Files (x86)\GnuWin32\bin`）
 
 #### ストレージ
 - [BUFFALO スマートツインズ](https://www.buffalo.jp/support/download/detail/?dl_contents_id=5130)：バックアップ
