@@ -1,3 +1,7 @@
 [user]
         email = 43331308+h-yoshikawa44@users.noreply.github.com
         name = h-yoshikawa44
+[core]
+        editor = code --wait
+[pull]
+        rebase = false
