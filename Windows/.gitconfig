@@ -3,3 +3,4 @@
         name = h-yoshikawa44
 [core]
         editor = code --wait
+        autocrlf = input
