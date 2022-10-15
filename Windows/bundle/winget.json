@@ -109,6 +109,9 @@
 					"PackageIdentifier" : "Microsoft.VisualStudioCode"
 				},
         {
+					"PackageIdentifier" : "JetBrains.Toolbox"
+				},
+        {
 					"PackageIdentifier" : "ResponsivelyApp.ResponsivelyApp"
 				},
 				{
