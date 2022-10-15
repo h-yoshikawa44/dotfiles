@@ -14,5 +14,5 @@ indent_style = tab
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{java,php,py,go,rs}]
+[*.{java,kt,php,py,go,rs}]
 indent_size = 4
