@@ -1,0 +1,60 @@
+name: Auto Production Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read # actions/checkout のために必要
+
+jobs:
+  check:
+    uses: ./.github/workflows/develop.yml
+
+  prod-deploy:
+    name: Production Deploy with OIDC
+    runs-on: ubuntu-20.04
+    timeout-minutes: 8
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: Package Install
+        run: npm install
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ http://secrets.AWS_OIDC_ROLE }}
+          role-session-name: AppProdDeployCI # 任意の名前
+          aws-region: ap-northeast-1
+
+      - name: Test OIDC
+        run: aws sts get-caller-identity
+
+      # 必要な環境変数
+      - name: SetUp ENV
+        run: |
+          echo "SLACK_WORKSPACE_URL=${{ secrets.SLACK_WORKSPACE_URL }}" >> .env.production
+          echo "SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}" >> .env.production
+          echo "SLACK_USER_TOKEN=${{ secrets.SLACK_USER_TOKEN }}" >> .env.production
+          echo "SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }}" >> .env.production
+          echo "SLACK_ALERT_CHANNEL=${{ secrets.SLACK_ALERT_CHANNEL }}" >> .env.production
+          echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> .env.production
+          echo "NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}" >> .env.production
+          echo "REST_API_ID=${{ http://secrets.REST_API_ID }}" >> .env.production
+          echo "REST_API_ROOT_RESOURCE_ID=${{ http://secrets.REST_API_ROOT_RESOURCE_ID }}" >> .env.production
+
+      - name: Serverless Deploy
+        run: npm run deploy:ci:prod

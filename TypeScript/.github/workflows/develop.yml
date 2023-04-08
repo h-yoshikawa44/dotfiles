@@ -1,8 +1,8 @@
 name: Develop Check
 on:
+  # 他のワークフローから呼び出したいときだけ（usesで呼び出せるようになる）
+  workflow_call:
   push:
-    branches-ignore:
-      - main
 
 jobs:
   check:
@@ -32,7 +32,7 @@ jobs:
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow
-          author_name: 'check'
+          author_name: "check"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
