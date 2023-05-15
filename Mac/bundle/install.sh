@@ -10,6 +10,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew upgrade
 brew bundle --file "${EXEPATH}"/Brewfile
 
+### zsh-completions に必要
+chmod -R go-w /opt/homebrew/share
+
 ## ========== cli ==========
 ### fnm か Volta いずれか
 curl -fsSL https://fnm.vercel.app/install | bash

@@ -16,6 +16,8 @@ brew "ripgrep"
 
 ## ========== Shell ==========
 brew "starship"
+brew "zsh-completions"
+brew "zsh-autosuggestions"
 
 ## ========== Fonts ==========
 tap  "homebrew/cask-fonts"
