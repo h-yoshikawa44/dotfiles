@@ -3,7 +3,12 @@
 Mac の場合は、フックファイルの作成時に実行権限がついてないことがあるのでつける
 ```bash
 # 例
-chmod a+x git-hooks/prepare-commit-msg
+chmod a+x .githooks/prepare-commit-msg
+```
+
+Windows 側で実行権限付与を Git に反映させたい場合はこちら
+```bash
+git update-index --add --chmod=+x [filename]
 ```
 
 ### prepare-commit-msg
@@ -16,6 +21,6 @@ package.json など設定を定義するところで、カスタムのフック�
 ```json
 "simple-git-hooks": {
   "pre-commit": "yarn run -s lint-staged",
-  "prepare-commit-msg": "./git-hook/prepare-commit-msg \"$@\""
+  "prepare-commit-msg": "./.githooks/prepare-commit-msg \"$@\""
 },
 ```
