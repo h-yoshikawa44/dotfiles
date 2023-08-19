@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2022-10-09T18:02:48.952-00:00",
+	"CreationDate" : "2023-08-19T15:00:34.904-00:00",
 	"Sources" :
 	[
     {
@@ -52,7 +52,7 @@
 					"PackageIdentifier" : "Microsoft.OneDrive"
 				},
         {
-					"PackageIdentifier" : "Google.Drive"
+					"PackageIdentifier" : "Google.GoogleDrive"
 				},
         {
 					"PackageIdentifier" : "Starship.Starship"
@@ -80,6 +80,12 @@
         // ========== development ==========
         {
 					"PackageIdentifier" : "GnuWin32.Make"
+				},
+        {
+					"PackageIdentifier" : "GnuPG.GnuPG"
+				},
+        {
+					"PackageIdentifier" : "GnuPG.Gpg4win"
 				},
 				{
 					"PackageIdentifier" : "Git.Git"
@@ -117,9 +123,6 @@
 				{
 					"PackageIdentifier" : "Figma.Figma"
 				},
-				{
-					"PackageIdentifier" : "TablePlus.TablePlus"
-				},
         {
 					"PackageIdentifier" : "Amazon.AWSCLI"
 				}
@@ -133,5 +136,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.3.2691"
+	"WinGetVersion" : "1.5.1881"
 }
