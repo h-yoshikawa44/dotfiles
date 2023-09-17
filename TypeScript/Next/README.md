@@ -4,13 +4,13 @@
 ## 環境構築
 create-next-app で雛形作成
 ```bash
-$ yarn create next-app [pj-name]
+npx create-next-app@latest
 ```
 ※テンプレートを使用したい場合は、`--example`で指定する
 
 サーバ立ち上げ
-```
-$ yarn dev
+```bash
+npm run dev
 ```
 
 ブラウザからアクセス
@@ -21,8 +21,8 @@ Next.js の開発サーバでは高速更新が有効になっている。 そ�
 
 ## TypeScript 対応
 空の tsconfig.json 作成
-```
-$ touch tsconfig.json
+```bash
+touch tsconfig.json
 ```
 
 この後にサーバを立ち上げなおすと、サーバが起動せず TypeScript のライブラリをインストールするように案内が表示されるようになっている。  
@@ -31,14 +31,14 @@ It looks like you're trying to use TypeScript but do not have the required packa
 
 Please install typescript and @types/react by running:
 
-        yarn add --dev typescript @types/react @types/node
+        npm i --dev typescript @types/react @types/node
 
 If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your pages directory).
 ```
 
 その案内されたライブラリをインストールする。
-```
-$ yarn add --dev typescript @types/react @types/node
+```bash
+npm i --dev typescript @types/react @types/node
 ```
 
 再度サーバ再起動で Next.js は以下のことを行う。

@@ -26,7 +26,6 @@
   "[typescriptreact]": {
     "editor.formatOnSave": true
   },
-  "eslint.packageManager": "yarn",
   // v14 + CSS in JSの時のみ
   "stylelint.validate": ["css", "typescript", "typescriptreact"]
 }

@@ -4,7 +4,10 @@
 インポート文で絶対パスを使えるようにする。  
 
 ### React
-これで`src`からの絶対パスで記述できるようになる。
+Vite で baseUrl を使えるようにする
+```bash
+npm i -D vite-tsconfig-paths
+```
 
 tsconfig.json
 ```json
@@ -14,18 +17,6 @@ tsconfig.json
   .
   .
 }
-```
-
-eslintrc
-```js
-settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.tsx', '.ts'],
-        paths: ['src'], // 追加
-      },
-    },
-  },
 ```
 
 ### Next.js
@@ -46,8 +37,8 @@ tsconfig.json
 ```
 
 ## typesync
-```
-$ yarn add -D typesync
+```bash
+npm i -D typesync
 ```
 package.json の scripts に追加して、ライブラリインストール時に型定義ライブラリがないかチェックするようにする。
 ```json
@@ -64,14 +55,14 @@ package.json の scripts に追加して、ライブラリインストール時�
 静的解析 + フォーマッタ
 
 ### インストール
-ESLint に関して、create-react-app で作成した React プロジェクトでは、すでに最低限のセットアップ済み。
+ESLint に関して、Vite で作成した React プロジェクトでは、すでに最低限のセットアップ済み。
 
 create-next-app で作成した Next.js プロジェクトでも、（v11.0.0）からはセットアップ済み。
 - [`eslint-config-next`の設定内容](https://github.com/vercel/next.js/blob/canary/packages/eslint-config-next/index.js)
 
 Prettier はセットアップされていないのでいれる。
-```
-$ yarn add -D prettier eslint-config-prettier
+```bash
+npm i -D prettier eslint-config-prettier
 ```
 
 <details>
@@ -89,31 +80,31 @@ module.exports = {
 ```
 
 空の ESLint 設定ファイル作成
-```
-$ touch .eslintrc.js
+```bash
+touch .eslintrc.js
 ```
 
 ビルドを実行（現状の機能では、サーバ起動では動作しない）
-```
-$ yarn build
+```bash
+npm run build
 ```
 ```
 It looks like you're trying to use ESLint but do not have the required package(s) installed.
 
 Please install eslint and eslint-config-next by running:
 
-        yarn add --dev eslint eslint-config-next
+        mpm i --dev eslint eslint-config-next
 
 If you are not trying to use ESLint, please remove the .eslintrc.js file from your application.
 ```
 案内されたライブラリをインストールする
-```
-$ yarn add -D eslint eslint-config-next
+```bash
+npm i -D eslint eslint-config-next
 ```
 
 再度、ビルド実行
-```
-$ yarn build
+```bash
+npm run build
 ```
 これで ビルド時にまず ESLint が動作しチェックを行うようになる。
 あわせて ESLint 設定ファイルに設定が追記される。
@@ -130,16 +121,16 @@ $ yarn build
 
 チェックコマンド例
 ```bash
-$ yarn run -s eslint './src/**/*.{js,jsx,ts,tsx}'
+npx eslint './src/**/*.{js,jsx,ts,tsx}'
 # Next.js v11 より
-$ yarn lint
+npm run lint
 
-$ yarn run -s prettier --check './**/*.{html,js,ts,json}'
+npx prettier --check './**/*.{html,js,ts,json}'
 ```
 
 ルール競合チェックコマンド例
 ```bash
-$ yarn run -s eslint-config-prettier './src/**/*.{js,jsx,ts,tsx}'
+npx eslint-config-prettier './src/**/*.{js,jsx,ts,tsx}'
 ```
 問題なければ以下の表示になる
 ```
@@ -150,12 +141,12 @@ package.json（React）
 ```json
 {
   "scripts": {
-    "lint-check": "yarn lint:eslint && yarn check:prettier",
+   "lint-check": "npm run lint:eslint && npm run check:prettier",
     "lint:eslint": "eslint \"./src/**/*.{js,jsx,ts,tsx}\"",
     "check:prettier": "prettier --check \"./{public,src}/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}\"",
-    "fix": "yarn fix:eslint && yarn fix:prettier",
-    "fix:eslint": "yarn lint:eslint --fix",
-    "fix:prettier": "yarn check:prettier --write",
+    "fix": "npm run fix:eslint && npm run fix:prettier",
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "fix:prettier": "npm run check:prettier -- --write",
   }
 }
 ```
@@ -164,12 +155,12 @@ package.json（Next.js v11以降）
 ```json
 {
   "scripts": {
-    "lint-check": "yarn lint:eslint && yarn check:prettier",
+    "lint-check": "npm run lint:eslint && npm run check:prettier",
     "lint:eslint": "next lint",
     "check:prettier": "prettier --check \"./{public,src}/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}\"",
-    "fix": "yarn fix:eslint && yarn fix:prettier",
-    "fix:eslint": "yarn lint:eslint --fix",
-    "fix:prettier": "yarn check:prettier --write",
+    "fix": "npm run fix:eslint && npm run fix:prettier",
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "fix:prettier": "npm run check:prettier -- --write",
   }
 }
 ```
@@ -203,8 +194,7 @@ settings.json
   },
   "[typescriptreact]": {
     "editor.formatOnSave": true // tsx ファイル保存時に Prettier 実行
-  },
-  "eslint.packageManager": "yarn" // ESLint のパッケージマネージャ
+  }
 }
 ```
 
@@ -234,8 +224,8 @@ ESLint と Prettier はルールが競合することがあるので、eslint-co
 その性質上、追加するのは extends の最後にすること。
 
 公開されている共有設定を使いたい場合は、インストールして適宜カスタマイズして使う。
-```
-$ yarn add -D eslint-config-airbnb
+```bash
+npm i -D eslint-config-airbnb
 ```
 
 チェックから除外したいファイルは`.eslintignore`、`prettierignore`に書いておく。
@@ -286,32 +276,32 @@ CSS in JS タイプのスタイル定義にも対応させられる。
 StyleLint v14系から、大きく破壊的変更がされているので扱いに注意。
 
 ### インストール
-```
-$ yarn add -D stylelint stylelint-config-prettier stylelint-config-standard stylelint-order stylelint-config-recess-order
+```bash
+npm i -D stylelint stylelint-config-prettier stylelint-config-standard stylelint-order stylelint-config-recess-order
 ```
 
 v14系以降で、CSS in JS に対応させる場合は以下も追加
-```
-$ yarn add -D postcss-syntax @stylelint/postcss-css-in-js
+```bash
+npm i -D postcss-syntax @stylelint/postcss-css-in-js
 ```
 
 ### CLI
 チェックコマンド例
 ```bash
 # CSS in JS 形式
-$ yarn run -s stylelint './src/**/*.{js,jsx,ts,tsx}'
+npx stylelint './src/**/*.{js,jsx,ts,tsx}'
 
 # チェック構文として、CSS in JS 構文を強制（v13系まで）
-$ yarn run -s stylelint --syntax 'css-in-js' './src/**/*.{js,jsx,ts,tsx}'
+npx stylelint --syntax 'css-in-js' './src/**/*.{js,jsx,ts,tsx}'
 ```
 
 package.json
 ```json
 "scripts": {
-  "lint-check": "yarn lint:eslint && yarn lint:stylelint && yarn check:prettier",
+  "lint-check": "npm run lint:eslint && npm run lint:stylelint && npm run check:prettier",
   "lint:stylelint": "stylelint \"./src/**/*.{js,jsx,ts,tsx}\"",
-  "fix": "yarn fix:eslint && yarn fix:stylelint && yarn fix:prettier",
-  "fix:stylelint": "yarn lint:stylelint --fix",
+  "fix": "npm run fix:eslint && npm run fix:stylelint && npm run fix:prettier",
+  "fix:stylelint": "npm run lint:stylelint -- --fix",
 }
 ```
 
@@ -368,7 +358,7 @@ module.exports = {
 
 ## Pre Commit 設定
 ```bash
-$ yarn add -D simple-git-hooks lint-staged
+npm i simple-git-hooks lint-staged
 ```
 
 package.json に追記（CSS in JS の例）
@@ -379,7 +369,7 @@ package.json に追記（CSS in JS の例）
 }
 
 "simple-git-hooks": {
-  "pre-commit": "yarn run -s lint-staged"
+  "pre-commit": "npx lint-staged"
 },
 "lint-staged": {
   "src/**/*.{js,jsx,ts,tsx}": [

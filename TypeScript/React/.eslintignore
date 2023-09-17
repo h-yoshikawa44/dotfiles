@@ -1,4 +1,8 @@
-build/
+dist/
 public/
-node_modules/
+**/coverage/
+**/node_modules/
+**/*.min.js
+*.config.js
 .*lintrc.js
+.*lintrc.cjs
