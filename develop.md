@@ -21,8 +21,14 @@
 
 テンプレを適用
 ```bash
-$ git config commit.template .gitmessage
+# ローカル
+git config commit.template .gitmessage
+
+# グローバル
+git config --global commit.template .gitmessage
 ```
+
+大体は`.gitmessage`で用意している印象があるので、グローバルでよさそう。
 
 ### 言語ごとの環境設定
 各言語のディレクトリ配下の README 参照。
