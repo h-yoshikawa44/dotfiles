@@ -8,7 +8,8 @@ chmod a+x .githooks/prepare-commit-msg
 
 Windows 側で実行権限付与を Git に反映させたい場合はこちら
 ```bash
-git update-index --add --chmod=+x [filename]
+# 例
+git update-index --add --chmod=+x .githooks/prepare-commit-msg
 ```
 
 ### prepare-commit-msg
@@ -20,7 +21,7 @@ git update-index --add --chmod=+x [filename]
 package.json など設定を定義するところで、カスタムのフックファイルを使用するようにする（引数を忘れずに渡す）
 ```json
 "simple-git-hooks": {
-  "pre-commit": "yarn run -s lint-staged",
+  "pre-commit": "npx lint-staged",
   "prepare-commit-msg": "./.githooks/prepare-commit-msg \"$@\""
 },
 ```
