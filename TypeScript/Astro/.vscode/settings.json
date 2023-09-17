@@ -29,5 +29,4 @@
   "[astro]": {
     "editor.formatOnSave": true
   },
-  "eslint.packageManager": "npm",
 }
