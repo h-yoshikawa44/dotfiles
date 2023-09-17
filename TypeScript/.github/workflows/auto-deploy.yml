@@ -1,0 +1,71 @@
+name: Main Check & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    uses: ./.github/workflows/develop.yml
+
+  deploy:
+    name: Build & Deploy
+    needs: check
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+          cache-dependency-path: './package-lock.json'
+
+      - name: Package Clean Install
+        run: npm ci
+
+      ## GitHub Pages の場合（"deploy": "npm run build && gh-pages -d dist"） ---------------------------------------
+      - name: Build & Deploy to GitHub Pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>" -m "${{ github.event.head_commit.message }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      ## Firebase Hosting の場合 ------------------------------------
+      - name: Build
+        env:
+          VITE_APP_KEY: ${{ secrets.FIREBASE_APP_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          VITE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+          VITE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          VITE_STORAGEBUCKET: ${{ secrets.FIREBASE_STORAGEBUCKET }}
+          VITE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          VITE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+        run: npm run build
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JIGSAW_LIKE_PUZZLE }}'
+          channelId: live
+          projectId: jigsaw-like-puzzle
+
+      ## ------------------------------------------------------------
+
+      - name: Slack Notification
+        uses: 8398a7/action-slack@v3
+        if: always()
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          author_name: 'deploy'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

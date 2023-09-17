@@ -15,26 +15,27 @@ jobs:
 
   prod-deploy:
     name: Production Deploy with OIDC
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 8
     environment:
       name: production
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version-file: '.node-version'
           cache: npm
+          cache-dependency-path: './package-lock.json'
 
-      - name: Package Install
-        run: npm install
+      - name: Package Clean Install
+        run: npm ci
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ http://secrets.AWS_OIDC_ROLE }}
           role-session-name: AppProdDeployCI # 任意の名前
@@ -43,7 +44,7 @@ jobs:
       - name: Test OIDC
         run: aws sts get-caller-identity
 
-      # 必要な環境変数
+      ## サーバレスデプロイ ------------------------------------------------
       - name: SetUp ENV
         run: |
           echo "SLACK_WORKSPACE_URL=${{ secrets.SLACK_WORKSPACE_URL }}" >> .env.production
@@ -58,3 +59,18 @@ jobs:
 
       - name: Serverless Deploy
         run: npm run deploy:ci:prod
+
+      ## S3 デプロイ + CloudFront キャッシュクリア -------------------------
+      # 環境変数が必要なら env で設定する
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+      - name: CloudFront Cache Clear
+        run: |
+          CFID=$(aws cloudfront list-distributions --query "DistributionList.Items[].{Id:Id,Origin:Origins.Items[0].DomainName}[?contains(Origin,'${{ secrets.AWS_S3_BUCKET_NAME }}.s3')] | [0].Id" | sed 's/"//g')
+          echo "aws cloudfront create-invalidation ${CFID}"
+          aws cloudfront create-invalidation --distribution-id ${CFID} --paths "/*"
