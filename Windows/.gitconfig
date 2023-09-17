@@ -1,8 +1,16 @@
 [user]
         email = 43331308+h-yoshikawa44@users.noreply.github.com
         name = h-yoshikawa44
+        # コミット署名に使うGPG Key
+        signingkey =
 [core]
         editor = code --wait
         autocrlf = input
 [ghq]
         root = ~/development/ghq
+[gpg]
+        program = C:/Program Files/Git/usr/bin/gpg
+[commit]
+        template = .gitmessage
+        # 自動コミット署名
+        gpgsign = true
