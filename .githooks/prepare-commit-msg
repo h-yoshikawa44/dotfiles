@@ -3,7 +3,6 @@
 # sed コマンドが GNU か BSD か確認
 GNU_SED=true
 sed --version 1>/dev/null 2>/dev/null || GNU_SED=false
-echo $GNU_SED
 
 # コミットメッセージ入力前に、ブランチ名から Issue 番号を抽出して置換する
 COMMIT_MSG_FILE=$1
