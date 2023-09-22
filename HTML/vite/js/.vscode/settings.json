@@ -21,5 +21,4 @@
     "editor.formatOnSave": true
   },
   "html-css-class-completion.enableEmmetSupport": true,
-  "eslint.packageManager": "yarn"
 }

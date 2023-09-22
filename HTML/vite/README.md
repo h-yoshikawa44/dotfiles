@@ -1,7 +1,7 @@
 # Vite での環境構築
 
-```
-$ yarn create vite
+```bash
+npm create vite
 ```
 
 基本的にはこれだけで OK。
@@ -9,10 +9,14 @@ $ yarn create vite
 ## PostCSS
 Vite のビルド時に実行したいものを、必要に応じていれる。
 ```
-$ yarn add -D postcss autoprefixer
+npm i -D postcss postcss-preset-env
 ```
 
-Autoprefixer：自動でベンダープレフィックスを付与してくれるもの
+postcss-preset-env：ほとんどの PostCSS をまとめて導入できるやつ
+
+例
+- Autoprefixer：自動でベンダープレフィックスを付与してくれるもの
+- postcss-media-minmax：メディアクエリの`<``>`記法を処理してくれる
 
 ## link タグでの CSS 読み込み
 CSS の読み込みは、どちらでもできる
