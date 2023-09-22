@@ -337,14 +337,11 @@ settings.json
 ### 設定ファイルのカスタマイズ
 複数パターンのうち、いずれかを使用。
 
-Prettier と衝突するルールがあるので、`stylelint-config-prettier`で無効にするようにしておく。
-
 ```js
 module.exports = {
   extends: [
     'stylelint-config-standard',
-    'stylelint-config-recess-order',
-    'stylelint-config-prettier', // 追記
+    'stylelint-config-recess-order'
   ],
   ...
   // v14で CSS in JS 対応する場合のみ
@@ -354,7 +351,25 @@ module.exports = {
       customSyntax: '@stylelint/postcss-css-in-js',
     },
   ],
+}
 ```
+
+<details>
+<summary>StyleLint 14系までの衝突ルール回避設定</summary>
+
+Prettier と衝突するルールがあるので、`stylelint-config-prettier`で無効にするようにしておく。
+
+```js
+module.exports = {
+  extends: [
+    'stylelint-config-standard',
+    'stylelint-config-recess-order',
+    'stylelint-config-prettier', // 追記
+  ],
+}
+```
+
+</details>
 
 ## Pre Commit 設定
 ```bash
