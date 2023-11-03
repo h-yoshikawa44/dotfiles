@@ -16,11 +16,17 @@ CSS in JS の一種。
 ```bash
 npm i @emotion/react
 ```
-基本的にはこれだけで使用できる。
+
+next.config.js で emotion を有効化
+```js
+compiler: {
+  emotion: true
+}
+```
+
+Next.js v12.2 からは emotion が標準サポートされたため、基本的にはこれだけで使用できる。
 
 ただ、CSS Prop の機能を使うには、使用ファイルそれぞれに`/** @jsxImportSource @emotion/react */`というプラグマを書く必要がある。
-Next v12.1.1 からは emotion の SWC サポートが入ったので、その機能を有効化するだけで OK っぽい。  
-（機能を有効化しなくても普通に CSS Prop 使えてる感じではあったけど）
 
 tsconfig.json に追記は必要  
 （これがないと CSS Prop を書こうとしても、そんなプロパティはないとエラーになる）
@@ -59,3 +65,84 @@ styled-components 形式コードの、シンタックスハイライトや入�
 入れるだけで OK。  
 styled-components 用であるが、emotion でも問題なく動作する。
 
+### Next.js(Pages Router) で PostCSS と共存させる手順
+SSR 前提になってしまうことに注意。
+
+必要なパッケージを導入
+```bash
+npm i @emotion/cache @emotion/server postcss postcss-preset-env
+```
+
+emotion のキャッシュ生成用、PostCSS 使用のファイル作成。  
+（Next/lib 配下のファイル参照）
+
+_app.tsx で emotion のキャッシュを使用するようにする（CacheProvider の部分）
+```tsx
+import { AppProps } from 'next/app';
+import { Global, CacheProvider, EmotionCache } from '@emotion/react';
+import { globalStyle } from '@/styles/globals';
+import { createEmotionCache } from '@/lib/emotionCache';
+
+const clientSideEmotionCache = createEmotionCache();
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+const MyApp = ({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}: MyAppProps) => {
+  return (
+    <CacheProvider value={emotionCache}>
+      <Global styles={globalStyle} />
+      <Component {...pageProps} />
+    </CacheProvider>
+  );
+};
+
+export default MyApp;
+```
+
+_document.tsx で getInitialProps による、ページ加工処理を追加
+```tsx
+import { Children } from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import createEmotionServer from '@emotion/server/create-instance';
+import { createEmotionCache } from '@/lib/emotionCache';
+import { processedCss } from '@/lib/postCss';
+.
+.
+.
+MyDocument.getInitialProps = async (ctx) => {
+  const originalRenderPage = ctx.renderPage;
+  const cache = createEmotionCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
+
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App: any) => (props) => (
+        <App emotionCache={cache} {...props} />
+      ),
+    });
+
+  const initialProps = await Document.getInitialProps(ctx);
+  const emotionStyles = extractCriticalToChunks(initialProps.html);
+  const emotionStyleTags = emotionStyles.styles.map((style) => {
+    const processedStyle = processedCss(style.css);
+
+    return (
+      <style
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+        key={style.key}
+        dangerouslySetInnerHTML={{ __html: processedStyle }}
+      />
+    );
+  });
+
+  return {
+    ...initialProps,
+    styles: [...Children.toArray(initialProps.styles), ...emotionStyleTags],
+  };
+};
+```
