@@ -230,60 +230,30 @@ npm i -D eslint-config-airbnb
 
 チェックから除外したいファイルは`.eslintignore`、`prettierignore`に書いておく。
 
-### 細かなエラー対応など
-<details>
-<summary>React の場合</summary>
-
-#### typescript-estree のサポートバーション
-サポート外のバージョンの TypeScript を使用していると、ESLint 実行時に警告が出るので、サポートバージョン内に合わせた方が無難かも。
-
-```
-=============
-
-WARNING: You are currently running a version of TypeScript which is not officially supported by @typescript-eslint/typescript-estree.
-
-You may find that it works just fine, or you may not.
-
-SUPPORTED TYPESCRIPT VERSIONS: >=3.3.1 <4.2.0
-
-YOUR TYPESCRIPT VERSION: 4.3.2
-
-Please only submit bug reports when using the officially supported version.
-
-=============
-```
-
-#### React 本体のインポート文を削除
-```tsx
-import React form 'react';
-```
-本体部分のみのインポートの場合は、React 17で改良された JSX Transform　によりインポート不要となった。
-
-#### App コンポーネントに VFC なり型定義を設定する
-explicit-module-boundary-types で関数の返り値の型定義をつけるよう言われるので、その対応。
-```
-Missing return type on function.eslint@typescript-eslint/explicit-module-boundary-types
-```
-
-reportWebVitals.ts でも同様のことを言われるので、void なりつける。
-
-</details>
-
 ## StyleLint
-スタイル定義の静的解析。
+スタイル定義の静的解析。  
 CSS in JS タイプのスタイル定義にも対応させられる。
+（最近のメジャーアップデート破壊的変更が入ることが多いので注意）
 
-StyleLint v14系から、大きく破壊的変更がされているので扱いに注意。
 
 ### インストール
 ```bash
-npm i -D stylelint stylelint-config-prettier stylelint-config-standard stylelint-order stylelint-config-recess-order
+npm i -D stylelint stylelint-config-standard stylelint-order stylelint-config-recess-order
 ```
 
-v14系以降で、CSS in JS に対応させる場合は以下も追加
+v15系以降で、CSS in JS に対応させる場合は以下も追加
+```bash
+npm i -D postcss-styled-syntax
+```
+
+<details>
+<summary>v14系以降で、CSS in JS に対応させる場合は以下も追加</summary>
+
 ```bash
 npm i -D postcss-syntax @stylelint/postcss-css-in-js
 ```
+
+</details>
 
 ### CLI
 チェックコマンド例
@@ -317,7 +287,7 @@ settings.json
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": true
   },
-  "stylelint.validate": ["css", "typescript", "typescriptreact"] // v14 で CSS in JS 対応させる場合のみ
+  "stylelint.validate": ["css", "typescript", "typescriptreact"] // v14以降 で CSS in JS 対応させる場合のみ
 }
 ```
 上部3つは、デフォルトで動作するスタイル定義の解析を無効にするもの（無効にしないと StyleLint のものと二重チェックになる）
@@ -337,6 +307,7 @@ settings.json
 ### 設定ファイルのカスタマイズ
 複数パターンのうち、いずれかを使用。
 
+
 ```js
 module.exports = {
   extends: [
@@ -344,11 +315,11 @@ module.exports = {
     'stylelint-config-recess-order'
   ],
   ...
-  // v14で CSS in JS 対応する場合のみ
+  // v14以降で CSS in JS 対応する場合のみ
   overrides: [
     {
       files: ['**/*.{ts,tsx}'],
-      customSyntax: '@stylelint/postcss-css-in-js',
+      customSyntax: 'postcss-styled-syntax',
     },
   ],
 }
@@ -358,6 +329,7 @@ module.exports = {
 <summary>StyleLint 14系までの衝突ルール回避設定</summary>
 
 Prettier と衝突するルールがあるので、`stylelint-config-prettier`で無効にするようにしておく。
+（v15からは、そもそも Pretter と競合するようなタイプのルールが非推奨になったので、回避設定不要になった）
 
 ```js
 module.exports = {

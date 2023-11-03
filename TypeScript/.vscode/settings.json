@@ -26,6 +26,6 @@
   "[typescriptreact]": {
     "editor.formatOnSave": true
   },
-  // v14 + CSS in JSの時のみ
+  // CSS in JSの時のみ
   "stylelint.validate": ["css", "typescript", "typescriptreact"]
 }

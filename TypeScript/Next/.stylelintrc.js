@@ -4,12 +4,16 @@ module.exports = {
     'stylelint-config-recess-order',
   ],
   plugins: ['stylelint-order'],
-  // v14 + CSS in JS の場合のみ
   overrides: [
     {
       files: ['**/*.{ts,tsx}'],
-      customSyntax: '@stylelint/postcss-css-in-js',
+      customSyntax: 'postcss-styled-syntax',
     },
   ],
   ignoreFiles: ['**/node_modules/**'],
+  rules: {
+    // 素の CSS 向けのルールで、それ以外では独自構文と相性が悪く非推奨なのでオフにする
+    'media-query-no-invalid': null
+  }
 };
+
