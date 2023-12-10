@@ -6,7 +6,15 @@ npm create vite
 
 基本的にはこれだけで OK。
 
-## PostCSS
+## CSS 加工
+### Lightning CSS
+```bash
+npm i -D lightningcss browserslist
+```
+
+vite.config.js で Lightning CSS を使うよう設定。
+
+### PostCSS
 Vite のビルド時に実行したいものを、必要に応じていれる。
 ```bash
 npm i -D postcss postcss-preset-env
