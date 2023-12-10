@@ -1,41 +1,80 @@
 # HTML・CSS・JavaScript 開発補助環境
 
-## Prettier・StyleLint・ESLint
+## Markuplint
 ### インストール
-必要に応じてインストール
+```bash
+npm i -D markuplint
 ```
-$ yarn add -D prettier stylelint stylelint-config-prettier stylelint-config-recess-order stylelint-config-standard stylelint-order eslint eslint-config-prettier
-```
+
 ### CLI
-チェックコマンド例
+```bash
+npx markuplint './**/*.html'
+
+npx markuplint './**/*.html' --fix
 ```
-$ yarn run -s prettier --check './**/*.{html,js,ts,json}'
 
-$ yarn run -s stylelint './css/**/*.css'
+## StyleLint
+### インストール
+```bash
+npm i -D stylelint stylelint-config-recess-order stylelint-config-standard stylelint-order
+```
 
-$ yarn run -s eslint './js/**/*.js'
+### CLI
+```bash
+npx stylelint './css/**/*.css'
+
+npx stylelint './css/**/*.css' --fix
+```
+
+## ESLint
+### インストール
+```bash
+npm i -D eslint eslint-config-prettier
+```
+
+### CLI
+```bash
+npx eslint './js/**/*.js'
+
+npx eslint './js/**/*.js' --fix
+```
+
+## Prettier
+### インストール
+```bash
+npm i -D prettier 
+```
+
+### CLI
+```bash
+npx prettier --check './**/*.{html,js,ts,json}'
+
+npx prettier --check './**/*.{html,js,ts,json}' --write
 ```
 
 package.json
 ```json
 {
   "scripts": {
-    "lint-check": "yarn lint:eslint && yarn lint:stylelint && yarn check:prettier",
-    "lint:eslint": "eslint \"./js/**/*.js\"",
+    "lint-check": "npm run lint:markuplint && npm run lint:stylelint && npm run lint:eslint && npm run check:prettier",
+    "lint:markuplint": "markuplint \"./**/*.html\"",
     "lint:stylelint": "stylelint \"./css/**/*.css\"",
-    "check:prettier": "prettier --check \"./**/*.{html,js,ts,json}\"",
-    "fix": "yarn fix:eslint && yarn fix:stylelint && yarn fix:prettier",
+    "lint:eslint": "eslint \"./js/**/*.js\"",
+    "check:prettier": "prettier --check \"./**/*.{html,css,json}\"",
+    "fix": "npm run fix:markuplint && npm run fix:stylelint && npm run fix:eslint && npm run fix:prettier",
+    "fix:markuplint": "npm run lint:markuplint -- --fix",
+    "fix:stylelint": "npm run lint:stylelint -- --fix",
     "fix:eslint": "yarn lint:eslint --fix",
-    "fix:stylelint": "yarn lint:stylelint --fix",
-    "fix:prettier": "yarn check:prettier --write"
+    "fix:prettier": "npm run check:prettier -- --write",
   }
 }
 ```
 
 ### VSCode 拡張
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [Markuplint](https://marketplace.visualstudio.com/items?itemName=yusukehirao.vscode-markuplint)
+- [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 
 settings.json
@@ -63,7 +102,6 @@ settings.json
     "editor.formatOnSave": true // json ファイル保存時に Prettier 実行
   },
   "html-css-class-completion.enableEmmetSupport": true, // Emmet でもクラス補完を使えるようにする
-  "eslint.packageManager": "yarn" // ESLint のパッケージマネージャ
 }
 ```
 
@@ -74,9 +112,9 @@ settings.json
 }
 ```
 
-## simple-git-hooks + lint-staged
-```
-$ yarn add -D simple-git-hooks lint-staged
+## simple-git-hooks + nano-staged
+```bash
+npm i -D simple-git-hooks nano-staged
 ```
 
 ```json
@@ -88,17 +126,22 @@ $ yarn add -D simple-git-hooks lint-staged
   .
   .
   "simple-git-hooks": {
-    "pre-commit": "yarn run -s lint-staged"
+    "pre-commit": "./node_modules/.bin/nano-staged",
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
-      "prettier --write --loglevel=error",
-      "eslint --fix --quiet"
+    "./**/*.html": [
+      "markuplint --fix --problem-only",
+      "prettier --write --loglevel=error"
     ],
     "css/**/*.css": [
-      "stylelint --fix --quiet"
+      "stylelint --fix --quiet",
+      "prettier --write --loglevel=error"
     ],
-    "./**/*.{html,json}": [
+    "src/**/*.{js,ts}": [
+      "eslint --fix --quiet"
+      "prettier --write --loglevel=error",
+    ],
+    "./**/*.json": [
       "prettier --write --loglevel=error"
     ]
   },
@@ -106,6 +149,6 @@ $ yarn add -D simple-git-hooks lint-staged
 ```
 
 設定反映
-```
-$ yarn run -s simple-git-hooks
+```bash
+npx simple-git-hooks
 ```
