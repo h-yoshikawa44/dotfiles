@@ -15,6 +15,11 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
 
+    # GitHub Pages デプロイ時に必要
+    permissions:
+      # gh-pages ブランチへの書き込み用
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
