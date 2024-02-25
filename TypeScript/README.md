@@ -345,7 +345,7 @@ module.exports = {
 
 ## Pre Commit 設定
 ```bash
-npm i simple-git-hooks lint-staged
+npm i simple-git-hooks nano-staged
 ```
 
 package.json に追記（CSS in JS の例）
@@ -356,9 +356,9 @@ package.json に追記（CSS in JS の例）
 }
 
 "simple-git-hooks": {
-  "pre-commit": "npx lint-staged"
+  "pre-commit": "npx nano-staged"
 },
-"lint-staged": {
+"nano-staged": {
   "src/**/*.{js,jsx,ts,tsx}": [
     "prettier --write --loglevel=error",
     "eslint --fix --quiet",
