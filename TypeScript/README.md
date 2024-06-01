@@ -344,8 +344,25 @@ module.exports = {
 </details>
 
 ## Pre Commit 設定
+Lefthook を使う方法
+
 ```bash
-npm i simple-git-hooks nano-staged
+npm i -D lefthook
+```
+
+lefthook.yml を用意して、package.json に追記
+```json
+"scripts": {
+  ...
+  "prepare": "lefthook install || echo 'Can not set git hooks'"
+}
+```
+
+<details>
+<summary>simple-git-hooks + nano-staged を使う方法</summary>
+
+```bash
+npm i -D simple-git-hooks nano-staged
 ```
 
 package.json に追記（CSS in JS の例）
@@ -360,15 +377,17 @@ package.json に追記（CSS in JS の例）
 },
 "nano-staged": {
   "src/**/*.{js,jsx,ts,tsx}": [
-    "prettier --write --loglevel=error",
+    "prettier --write --log-level=error",
     "eslint --fix --quiet",
     "stylelint --fix --quiet"
   ],
   "./**/*.{html,gql,graphql,json}": [
-    "prettier --write --loglevel=error"
+    "prettier --write --log-level=error"
   ]
 }
 ```
+
+</details>
 
 ---
 

@@ -1,4 +1,6 @@
 # Git Hooks
+※Lefthook でやった方が簡単ではある（[TypeScript 環境での例](https://github.com/h-yoshikawa44/dotfiles/blob/main/TypeScript/README.md#pre-commit-%E8%A8%AD%E5%AE%9A)）
+
 ## simple-git-hooks での使い方
 Mac の場合は、フックファイルの作成時に実行権限がついてないことがあるのでつける
 ```bash
