@@ -29,7 +29,7 @@ npx stylelint './css/**/*.css' --fix
 ## ESLint
 ### インストール
 ```bash
-npm i -D eslint eslint-config-prettier
+npm i -D eslint neostandard
 ```
 
 ### CLI
@@ -42,7 +42,7 @@ npx eslint './js/**/*.js' --fix
 ## Prettier
 ### インストール
 ```bash
-npm i -D prettier 
+npm i -D prettier
 ```
 
 ### CLI
@@ -84,23 +84,11 @@ settings.json
   "less.validate": false, // // StyleLint を使うので、デフォルトの構文チェックを無効化
   "scss.validate": false, // // StyleLint を使うので、デフォルトの構文チェックを無効化
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true, // ファイル保存時に ESLint 実行
-    "source.fixAll.stylelint": true // ファイル保存時に StyleLint 実行
+    "source.fixAll.eslint": "explicit", // ファイル保存時に ESLint 実行
+    "source.fixAll.stylelint": "explicit" // ファイル保存時に StyleLint 実行
   },
-  "editor.formatOnSave": false, // デフォルトのフォーマットを無効化
+  "editor.formatOnSave": true, // デフォルトのフォーマットを有効化
   "editor.defaultFormatter": "esbenp.prettier-vscode", // デフォルトフォーマッターに Pretter を設定
-  "[html]": {
-    "editor.formatOnSave": true // html ファイル保存時に Prettier 実行
-  },
-  "[css]": {
-    "editor.formatOnSave": true // css ファイル保存時に Prettier 実行
-  },
-  "[javascript]": {
-    "editor.formatOnSave": true // js ファイル保存時に Prettier 実行
-  },
-  "[json]": {
-    "editor.formatOnSave": true // json ファイル保存時に Prettier 実行
-  },
   "html-css-class-completion.enableEmmetSupport": true, // Emmet でもクラス補完を使えるようにする
 }
 ```
@@ -110,45 +98,4 @@ settings.json
 {
   "stylelint.stylelintPath": "./node_modules/stylelint"
 }
-```
-
-## simple-git-hooks + nano-staged
-```bash
-npm i -D simple-git-hooks nano-staged
-```
-
-```json
-{
-  "scripts": {
-    "prepare": "simple-git-hooks || echo 'Can not set git hooks'"
-  }
-  .
-  .
-  .
-  "simple-git-hooks": {
-    "pre-commit": "./node_modules/.bin/nano-staged",
-  },
-  "lint-staged": {
-    "./**/*.html": [
-      "markuplint --fix --problem-only",
-      "prettier --write --loglevel=error"
-    ],
-    "css/**/*.css": [
-      "stylelint --fix --quiet",
-      "prettier --write --loglevel=error"
-    ],
-    "src/**/*.{js,ts}": [
-      "eslint --fix --quiet"
-      "prettier --write --loglevel=error",
-    ],
-    "./**/*.json": [
-      "prettier --write --loglevel=error"
-    ]
-  },
-}
-```
-
-設定反映
-```bash
-npx simple-git-hooks
 ```
