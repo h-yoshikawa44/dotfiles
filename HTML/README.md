@@ -47,9 +47,9 @@ npm i -D prettier
 
 ### CLI
 ```bash
-npx prettier --check './**/*.{html,js,ts,json}'
+npx prettier --check './**/*.{html,css,js,ts,json,yml}'
 
-npx prettier --check './**/*.{html,js,ts,json}' --write
+npx prettier --check './**/*.{html,css,js,ts,json,yml}' --write
 ```
 
 package.json
