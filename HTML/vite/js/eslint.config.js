@@ -9,6 +9,7 @@ export default [
   ...neostandard(),
   plugins['@stylistic'].configs.customize({
     semi: true,
+    braceStyle: '1tbs',
   }),
   plugins.promise.configs['flat/recommended'],
   {
