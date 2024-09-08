@@ -44,9 +44,15 @@ export default defineConfig({
 
 [VSCode](https://marketplace.visualstudio.com/items?itemName=antfu.unocss) 拡張も入れておく。
 
-## ESLint・Prettier
+## ESLint
 ```bash
-npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-astro  eslint-plugin-jsx-a11y prettier prettier-plugin-astro
+npm install -D eslint @eslint/js @typescript-eslint/parser typescript-eslint eslint eslint-plugin-astro eslint-plugin-jsx-a11y
 ```
 
-設定ファイルは .eslintrc.json を参照。
+設定ファイルは eslint.config.js を参照。
+
+## Prerttier
+```bash
+npm install -D prettier prettier-plugin-astro
+```
+
