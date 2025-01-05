@@ -14,6 +14,9 @@ brew bundle --file "${EXEPATH}"/Brewfile
 chmod -R go-w /opt/homebrew/share
 
 ## ========== cli ==========
+### fnm か Volta いずれか
+curl -fsSL https://fnm.vercel.app/install | bash
+curl https://get.volta.sh | bash
 
 ## ========== settings ==========
 curl "${$DOTFILESRAW}/Mac/.zshrc" -o "${HOME}/.zshrc"
