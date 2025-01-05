@@ -26,8 +26,7 @@ cask "font-hackgen-nerd"
 
 ## ========== Language & Databases ==========
 brew "gcc"
-brew "asdf"
-brew "anyenv" # asdf とどっちかでもいいかも
+brew "mise"
 
 ## ========== Applications ==========
 cask "fig"
