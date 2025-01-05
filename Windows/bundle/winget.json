@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2024-08-17T14:32:56.737-00:00",
+	"CreationDate" : "2025-01-05T19:00:00.000-00:00",
 	"Sources" :
 	[
     {
@@ -125,7 +125,7 @@
 					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
 				},
         {
-					"PackageIdentifier" : "Volta.Volta"
+					"PackageIdentifier" : "jdx.mise"
 				},
         {
 					"PackageIdentifier" : "Docker.DockerDesktop"

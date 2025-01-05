@@ -5,10 +5,4 @@ test -f ~/.bashrc && . ~/.bashrc
 export LANG=ja_JP.UTF-8
 
 # Command Completions
-if type volta &>/dev/null
-then
-  for COMPLETION in "${HOME}/bash_completion/"*
-  do
-    [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-  done
-fi
+# (keep)
