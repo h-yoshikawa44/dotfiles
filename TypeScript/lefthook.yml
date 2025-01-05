@@ -4,8 +4,8 @@ pre-commit:
     js-ts-fixer:
       glob: "src/**/*.{js,jsx,ts,tsx}"
       run: |
-        npx prettier --write --log-level=error {staged_files}
-        npx eslint --fix --quiet {staged_files}
+        npx prettier --write --log-level=error "{staged_files}"
+        npx eslint --fix --quiet "{staged_files}"
       # デフォルトではコマンド実行後の差分を stage に上げてくれないので上げるようにする
       stage_fixed: true
       skip:
@@ -13,7 +13,7 @@ pre-commit:
         - rebase
     formatter:
       glob: "./**/*.{html,gql,graphql,json}"
-      run: npx prettier --write --log-level=error {staged_files}
+      run: npx prettier --write --log-level=error "{staged_files}"
       stage_fixed: true
       skip:
         - merge
