@@ -36,21 +36,6 @@ tsconfig.json
 }
 ```
 
-## typesync
-```bash
-npm i -D typesync
-```
-package.json の scripts に追加して、ライブラリインストール時に型定義ライブラリがないかチェックするようにする。
-```json
-"scripts": {
-  .
-  .
-  .
-  "preinstall": "typesync || echo 'skip typesync'"
-}
-```
-`|| echo 'skip typesync'`がついているのは、初回インストール時に typesync がないことによるエラー回避のため。  
-
 ## ESLint・Prettier
 静的解析 + フォーマッタ
 
@@ -208,6 +193,16 @@ settings.json
 ```
 
 ### 設定ファイルのカスタマイズ
+設定ファイルは flat config 式（`eslint.config.mjs`）を使う。
+チェックから除外したいファイルも、同ファイルで設定する。
+
+公開されている共有設定を使いたい場合は、インストールして適宜カスタマイズして使う。
+```bash
+npm i -D eslint-config-airbnb
+```
+
+<details>
+<summary>flat config 前の ESLint 設定</summary>
 設定ファイルの形式は複数パターンのうち、いずれかを使う。
 なので、`package.json`側に定義されている設定がある場合は削除しておく。
 
@@ -223,12 +218,9 @@ extends: [
 ESLint と Prettier はルールが競合することがあるので、eslint-config-prettier を適用することで競合するルールを無効化して調整する。  
 その性質上、追加するのは extends の最後にすること。
 
-公開されている共有設定を使いたい場合は、インストールして適宜カスタマイズして使う。
-```bash
-npm i -D eslint-config-airbnb
-```
-
 チェックから除外したいファイルは`.eslintignore`、`prettierignore`に書いておく。
+
+</details>
 
 ## StyleLint
 スタイル定義の静的解析。  
