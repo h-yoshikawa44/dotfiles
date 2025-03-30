@@ -60,7 +60,7 @@ package.json
     "lint:markuplint": "markuplint \"./**/*.html\"",
     "lint:stylelint": "stylelint \"./css/**/*.css\"",
     "lint:eslint": "eslint \"./js/**/*.js\"",
-    "check:prettier": "prettier --check \"./**/*.{html,css,json}\"",
+    "check:prettier": "prettier --check \"./**/*.{html,css,json,yml}\"",
     "fix": "npm run fix:markuplint && npm run fix:stylelint && npm run fix:eslint && npm run fix:prettier",
     "fix:markuplint": "npm run lint:markuplint -- --fix",
     "fix:stylelint": "npm run lint:stylelint -- --fix",
@@ -90,6 +90,9 @@ settings.json
   "editor.formatOnSave": true, // デフォルトのフォーマットを有効化
   "editor.defaultFormatter": "esbenp.prettier-vscode", // デフォルトフォーマッターに Pretter を設定
   "html-css-class-completion.enableEmmetSupport": true, // Emmet でもクラス補完を使えるようにする
+  "[markdown]": { // マークダウンと Prettier の相性が気になるのでオフにする
+    "editor.formatOnSave": false
+  }
 }
 ```
 
