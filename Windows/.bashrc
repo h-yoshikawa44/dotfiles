@@ -34,9 +34,10 @@ eval "$(starship init bash)"
 
 # Cursor 上のターミナル操作では Cursor でコミットメッセージが書けるようにする
 case "$VSCODE_GIT_ASKPASS_MAIN" in
-        *cursor*)
-                git config --local core.editor "cursor --wait"
-                ;;
-        *)
-                git config --local core.editor "code --wait"
+  *cursor*)
+    git config --local core.editor "cursor --wait"
+    ;;
+  *)
+    git config --local core.editor "code --wait"
+    ;;
 esac
