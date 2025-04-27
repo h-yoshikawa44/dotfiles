@@ -27,3 +27,16 @@ bind -x '"\C-h": peco-history-selection'
 
 # Starship
 eval "$(starship init bash)"
+
+## ----------------------------------------
+##  Git Editor
+## ----------------------------------------
+
+# Cursor 上のターミナル操作では Cursor でコミットメッセージが書けるようにする
+case "$VSCODE_GIT_ASKPASS_MAIN" in
+        *cursor*)
+                git config --local core.editor "cursor --wait"
+                ;;
+        *)
+                git config --local core.editor "code --wait"
+esac
