@@ -15,17 +15,17 @@ jobs:
 
   prod-deploy:
     name: Production Deploy with OIDC
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     environment:
       name: production
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.node-version'
           cache: npm
@@ -37,7 +37,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ http://secrets.AWS_OIDC_ROLE }}
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
           role-session-name: AppProdDeployCI # 任意の名前
           aws-region: ap-northeast-1
 
@@ -54,8 +54,8 @@ jobs:
           echo "SLACK_ALERT_CHANNEL=${{ secrets.SLACK_ALERT_CHANNEL }}" >> .env.production
           echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> .env.production
           echo "NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}" >> .env.production
-          echo "REST_API_ID=${{ http://secrets.REST_API_ID }}" >> .env.production
-          echo "REST_API_ROOT_RESOURCE_ID=${{ http://secrets.REST_API_ROOT_RESOURCE_ID }}" >> .env.production
+          echo "REST_API_ID=${{ secrets.REST_API_ID }}" >> .env.production
+          echo "REST_API_ROOT_RESOURCE_ID=${{ secrets.REST_API_ROOT_RESOURCE_ID }}" >> .env.production
 
       - name: Serverless Deploy
         run: npm run deploy:ci:prod
