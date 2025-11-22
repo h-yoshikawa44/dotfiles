@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2024-08-17T14:32:56.737-00:00",
+	"CreationDate" : "2025-11-23T00:41:11.148-00:00",
 	"Sources" :
 	[
     {
@@ -79,13 +79,16 @@
 				},
         // ========== tool ==========
         {
-					"PackageIdentifier" : "7zip.7zip"
-				},
-        {
 					"PackageIdentifier" : "NickeManarin.ScreenToGif"
 				},
         {
 					"PackageIdentifier" : "Adobe.Acrobat.Reader.64-bit"
+				},
+        {
+					"PackageIdentifier" : "Bitwarden.Bitwarden"
+				},
+        {
+					"PackageIdentifier" : "Microsoft.Teams"
 				},
         // ========== development ==========
         {
@@ -158,5 +161,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.8.1911"
+	"WinGetVersion" : "1.12.350"
 }
