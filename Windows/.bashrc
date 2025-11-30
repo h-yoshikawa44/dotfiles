@@ -21,6 +21,14 @@ function peco-history-selection() {
 }
 bind -x '"\C-h": peco-history-selection'
 
+# safe-chain
+source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
+
+# aliases
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
+
 ## ----------------------------------------
 ##  Prompt
 ## ----------------------------------------
