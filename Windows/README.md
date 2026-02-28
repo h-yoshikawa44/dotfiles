@@ -40,7 +40,3 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
   - GPG 鍵：できれば前の端末から移行してきた方がよい
 - [Starship](https://starship.rs/)：プロンプト
   - winget でインストール後、~/.config を作り、その下に starship.toml ファイルを配置
-- [ghq](https://github.com/x-motemen/ghq)：Git リポジトリ一元管理コマンド
-  - [最新リリース]()から amd64 のバイナリを落としてきてパスを通す
-- [peco](https://github.com/peco/peco)
-  - [最新リリース](https://github.com/peco/peco/releases)から amd64 のバイナリを落としてきてパスを通す
