@@ -1,15 +1,11 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-11-23T00:41:11.148-00:00",
+	"CreationDate" : "2026-02-28T18:17:00.000-00:00",
 	"Sources" :
 	[
     {
 			"Packages" :
 			[
-				{
-           // Devtoys
-					"PackageIdentifier" : "9PGCV4V3BK4W"
-				},
 				{
            // iCloud
 					"PackageIdentifier" : "9PKTQ5699M62"
@@ -79,6 +75,9 @@
 				},
         // ========== tool ==========
         {
+     			"PackageIdentifier" : "DevToys-app.DevToys"
+				},
+        {
 					"PackageIdentifier" : "NickeManarin.ScreenToGif"
 				},
         {
@@ -104,7 +103,13 @@
 					"PackageIdentifier" : "Git.Git"
 				},
         {
-					"PackageIdentifier" : "Starship.Starship"
+					"PackageIdentifier" : "jdx.mise"
+				},
+        {
+					"PackageIdentifier" : "x-motemen.ghq"
+				},
+        {
+					"PackageIdentifier" : "peco.peco"
 				},
         {
 					"PackageIdentifier" : "Microsoft.VCRedist.2005.x86"
@@ -161,5 +166,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.12.350"
+	"WinGetVersion" : "1.28.190"
 }
