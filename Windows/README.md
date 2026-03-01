@@ -40,3 +40,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
   - GPG 鍵：できれば前の端末から移行してきた方がよい
 - [Starship](https://starship.rs/)：プロンプト
   - winget でインストール後、~/.config を作り、その下に starship.toml ファイルを配置
+- mise
+  - winget でインストール + PATH を通すまでやってくれるが、GitHook 環境で任意の npm パッケージを動かすために追加で PATH 設定が必要
+  - `{HOME}\AppData\Local\mise\shims`
