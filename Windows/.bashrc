@@ -24,6 +24,9 @@ bind -x '"\C-h": peco-history-selection'
 # safe-chain
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
 
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
+
 # aliases
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
