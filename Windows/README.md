@@ -33,6 +33,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
 - make：
   - winget でインストールできるが、パスが通ってない場合があるので通す（例：`C:\Program Files (x86)\GnuWin32\bin`）
 - [ngrok](https://ngrok.com/)：ローカルサーバを公開
+- [Vite+](https://viteplus.dev/)：フロントエンドツールチェイン
+  - Node.js は mise 経由で管理したいので`vp env off`で Vite+ 側の管理は無効にする
 
 #### シェル
 - Git
@@ -42,4 +44,5 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; .\Windows\bundle\install.ps1
   - winget でインストール後、~/.config を作り、その下に starship.toml ファイルを配置
 - mise
   - winget でインストール + PATH を通すまでやってくれるが、GitHook 環境で任意の npm パッケージを動かすために追加で PATH 設定が必要
-  - `{HOME}\AppData\Local\mise\shims`
+    - `{HOME}\AppData\Local\mise\shims`
+  - Claude の statusline スクリプトなどのために mise 経由で Python を入れる場合、`%USERPROFILE%\AppData\Local\Microsoft\WindowsApps`よりも上に mise のパスを入れておく（上にあるパスが優先されるため）
