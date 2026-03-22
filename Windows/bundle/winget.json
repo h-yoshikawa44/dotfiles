@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2026-02-28T18:17:00.000-00:00",
+	"CreationDate" : "2026-03-22T20:17:00.000-00:00",
 	"Sources" :
 	[
     {
@@ -133,9 +133,6 @@
 					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
 				},
         {
-					"PackageIdentifier" : "Volta.Volta"
-				},
-        {
 					"PackageIdentifier" : "Docker.DockerDesktop"
 				},
 				{
@@ -156,6 +153,10 @@
         {
 					"PackageIdentifier" : "Amazon.AWSCLI"
 				}
+        // ========== AI ==========
+        {
+					"PackageIdentifier" : "Anthropic.ClaudeCode"
+				}
 			],
 			"SourceDetails" :
 			{
@@ -166,5 +167,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.28.190"
+	"WinGetVersion" : "1.28.220"
 }
